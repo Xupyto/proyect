@@ -34,17 +34,15 @@ class Pokemon_aprende_movRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByManyFields($format, $poke, $mov, $porcentaje)
+    public function findByManyFields($format, $poke, $mov)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.formato = :val1')
             ->andWhere('p.pokemonIdpoke = :val2')
             ->andWhere('p.movimiento = :val3')
-            ->andWhere('p.porcentajeUso = :val4')
             ->setParameter('val1', $format)
             ->setParameter('val2', $poke)
             ->setParameter('val3', $mov)
-            ->setParameter('val4', $porcentaje)
             ->getQuery()
             ->getResult()
             ;    

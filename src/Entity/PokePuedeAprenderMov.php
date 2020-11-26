@@ -14,7 +14,7 @@ class PokePuedeAprenderMov
 {
     /**
      * @var float
-     * @ORM\Id
+     * 
      * @ORM\Column(name="Porcentaje_uso", type="float", precision=10, scale=0, nullable=false)
      */
     private $porcentajeUso;

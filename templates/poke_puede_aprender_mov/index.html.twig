@@ -24,7 +24,8 @@
                 <td>{{ poke_puede_aprender_mov.porcentajeUso }} %</td>
                 <td>
                     <a class="btn btn-primary" href="{{ path('poke_puede_aprender_mov_edit', {'formato': poke_puede_aprender_mov.formato.id, 'poke': poke_puede_aprender_mov.pokemonIdpoke.idpoke,
-                     'mov': poke_puede_aprender_mov.movimiento.idmov, 'porcentaje': poke_puede_aprender_mov.porcentajeUso}) }}">Editar</a>
+                     'mov': poke_puede_aprender_mov.movimiento.idmov}) }}">Editar</a>
+                     {{ include('poke_puede_aprender_mov/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

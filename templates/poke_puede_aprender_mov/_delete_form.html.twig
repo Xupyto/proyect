@@ -1,6 +1,5 @@
 <form method="post" action="{{ path('poke_puede_aprender_mov_delete', {'formato': poke_puede_aprender_mov.formato.id, 'poke': poke_puede_aprender_mov.pokemonIdpoke.idpoke,
-                     'mov': poke_puede_aprender_mov.movimiento.idmov, 'porcentaje': poke_puede_aprender_mov.porcentajeUso}) }}" onsubmit="return confirm('Seguro que quieres borrar esto?');">
+                     'mov': poke_puede_aprender_mov.movimiento.idmov}) }}" onsubmit="return confirm('Seguro que quieres borrar esto?');">
     <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ poke_puede_aprender_mov.formato.nombre) }}">
     <button class="btn">Borrar</button>
 </form>

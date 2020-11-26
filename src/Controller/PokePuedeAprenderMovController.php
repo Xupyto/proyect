@@ -73,13 +73,15 @@ class PokePuedeAprenderMovController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{formato}/{poke}/{mov}/{porcentaje}", name="poke_puede_aprender_mov_edit", methods={"GET","POST"})
+     * @Route("/edit/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Formato $formato, Pokemon $poke, Movimiento $mov, int $porcentaje): Response
+    public function edit(Request $request, Formato $formato, Pokemon $poke, Movimiento $mov): Response
     {
         
-        
-        $form = $this->createForm(PokePuedeAprenderMovType::class, $pokePuedeAprenderMov);
+        $em = $this->getDoctrine()->getManager();
+        $pokePuedeAprenderMov = $em->getRepository(PokePuedeAprenderMov::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$mov->getIdMov());
+        $hola = $pokePuedeAprenderMov[0];
+        $form = $this->createForm(PokePuedeAprenderMovType::class, $hola);
         $form->handleRequest($request);
        
         
@@ -100,15 +102,18 @@ class PokePuedeAprenderMovController extends AbstractController
     
 
     /**
-     * @Route("/{formato}", name="poke_puede_aprender_mov_delete", methods={"DELETE"})
+     * @Route("/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_delete", methods={"DELETE", "GET"})
      */
-    public function delete(Request $request, PokePuedeAprenderMov $pokePuedeAprenderMov): Response
+    public function delete(Formato $formato, Pokemon $poke, Movimiento $mov): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pokePuedeAprenderMov->getFormato(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($pokePuedeAprenderMov);
-            $entityManager->flush();
-        }
+       
+        $em = $this->getDoctrine()->getManager();
+        $pokePuedeAprenderMov = $em->getRepository(PokePuedeAprenderMov::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$mov->getIdMov());
+        $hola = $pokePuedeAprenderMov[0];
+        
+        $em->remove($hola);
+        $em->flush();
+        
 
         return $this->redirectToRoute('poke_puede_aprender_mov_index');
     }
