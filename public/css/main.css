@@ -1,0 +1,58 @@
+#formlogin {
+    width: 30%;
+    margin: 50px auto;
+}
+
+#princi {
+    width: 45%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#princi a.btn {
+    margin-bottom: 5px;
+}
+
+#princi img + a {
+    color: white;
+    font-size: 1.2em;
+}
+
+#princi img + a:hover {
+    text-decoration: none;
+    color: royalblue;
+}
+
+.titulo {
+    text-align: center;
+}
+
+.pagination {
+    margin: 20px 40%;
+}
+
+
+#formpoke label {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+form[name="poke"] {
+    background-color: burlywood;
+    border-radius: 2em;
+    padding: 2em;
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+form[name="poke"] button {
+    display: inline;
+}
+
+.errores, .error {
+    color: red;
+}
+
+

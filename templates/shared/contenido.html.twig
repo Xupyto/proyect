@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokémon{% endblock %}
+
+{% block body %}
+<h1 class="titulo">{{ pokemon.nombre }}</h1>
+<div>
+    <img width="100" heigh="100" class="show" src="{{ asset('imagenes//'~ pokemon.foto) }}" alt="{{pokemon.nombre}}">
+    <img width="100" heigh="50" class="show" src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[0].nombre ) }}" alt="{{pokemon.tipoNombre[0].nombre}}">
+   {% if pokemon.tipoNombre[1] is defined %}
+    <img width="100" heigh="50" class="show" src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[1].nombre ) }}" alt="{{pokemon.tipoNombre[1].nombre}}">
+    {% endif %}
+    
+
+
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <h1>Estadísticas</h1>
+        <ul class="list-group">
+            <li class="list-group-item"> 
+                <div class="progress">
+                HP
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (pokemon.hp*100)/mayor }}%" aria-valuenow="{{pokemon.hp}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.hp}}</div>
+                </div>
+                
+            </li>
+            <li class="list-group-item"><div class="progress">
+                Atk
+                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ (pokemon.atq*100)/mayor }}%" aria-valuenow="{{pokemon.atq}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.atq}}</div>
+                </div>
+            </li>
+            <li class="list-group-item"><div class="progress">
+                Def
+                <div class="progress-bar bg-info" role="progressbar" style="width: {{ (pokemon.def*100)/mayor }}%" aria-valuenow="{{pokemon.def}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.def}}</div>
+                </div>
+            </li>
+            <li class="list-group-item"><div class="progress">
+                Spa
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{ (pokemon.spa*100)/mayor }}%" aria-valuenow="{{pokemon.spa}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.spa}}</div>
+                </div>
+            </li>
+            <li class="list-group-item"><div class="progress">
+                Spd
+                <div class="progress-bar" role="progressbar" style="width: {{ (pokemon.spd*100)/mayor }}%" aria-valuenow="{{pokemon.spd}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.spd}}</div>
+                </div>
+            </li>
+            <li class="list-group-item"><div class="progress">
+                Vel
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (pokemon.vel*100)/mayor }}%" aria-valuenow="{{pokemon.vel}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.vel}}</div>
+                </div>
+            </li>
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+           <a class="btn btn-primary" href="{{ path('poke_edit', {'idpoke': pokemon.idpoke}) }}">Editar</a>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        <h1>Movimientos</h1>
+        <ul class="list-group">
+        {% set i = 0 %}
+        {% for a in ataques %}
+            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25" class="show" src="{{ asset('imagenes/tipos//'~ ataques[i].movimiento.tipoNombre.nombre ) }}" alt="{{ataques[i].movimiento.tipoNombre.nombre}}"> - {{ataques[i].porcentajeUso}} %</li>
+            
+             {% set i = i+1 %}
+        {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+           <a class="btn btn-primary" href="{{ path('anadir_mov', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
+        {% endif %} 
+    </div>
+    <div class="col-sm-4">
+        <h1>Objetos</h1>
+        <ul class="list-group">
+        {% set i = 0 %}
+        {% for object in objetos %}
+            <li class="list-group-item">{{objetos[i].objetoIdobjeto.nombre}} - {{objetos[i].porcentajeUso}} %</li>
+             {% set i = i+1 %}
+        {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <button>Editar</button>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <h1>Habilidades</h1>
+        <ul class="list-group">
+        {% set i = 0 %}
+        {% for hab in habilidades %}
+            <li class="list-group-item">{{habilidades[i].habilidad.nombre}} - {{habilidades[i].porcentajeUso}} %</li>
+             {% set i = i+1 %}
+        {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <button>Editar</button>
+        {% endif %}
+        </div>
+        <div class="col-sm-4">
+        <h1>Compañeros</h1>
+        <ul class="list-group">
+        {% set i = 0 %}
+        {% for comp in companeros %}
+        
+            <li class="list-group-item">
+            <img width="50" heigh="25" class="show" src="{{ asset('imagenes//'~ companeros[i].pokemonIdpoke1.nombre) }}" alt="{{companeros[i].pokemonIdpoke1.nombre}}">
+            {{companeros[i].pokemonIdpoke1.nombre}} - {{companeros[i].porcentajeUso}} %</li>
+             {% set i = i+1 %}
+        {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <button>Editar</button>
+        {% endif %}
+        </div>
+        <div class="col-sm-4">
+        <h1>Spread</h1>
+        <ul class="list-group">
+        {% for spread in spreads %}
+            <li class="list-group-item">{{spread.spreadIdspread.stats}} - {{spread.porcentajeUso}} %</li>
+        {% endfor %}
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <button>Editar</button>
+        {% endif %}
+        </div>
+</div>
+{% endblock %}

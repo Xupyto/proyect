@@ -1,0 +1,43 @@
+ <nav id="menu" class="navbar navbar-expand-lg navbar-light bg-light">
+        
+  <a id="titulo-menu" class="navbar-brand" href="{{path('poke_index')}}">Pikalytics</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('poke_index')}}">Pokédex <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="">Team builder</a>
+      </li>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="">Artículos</a>
+      </li>
+      {% if is_granted('ROLE_ADMIN') %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mantenimiento
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('poke_index')}}">Pokemon</a>
+          <a class="dropdown-item" href="{{path('poke_puede_aprender_mov_index')}}">Pokemon puede aprender movs</a>
+          <a class="dropdown-item" href="{{path('formato_index')}}">Formato</a>
+          <a class="dropdown-item" href="{{path('movimiento_index')}}">Movimiento</a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+    
+  </div>
+{% if not app.user %}
+  <a href="{{path('app_login')}}" class="btn btn-info login">Iniciar sesión</a>
+  <a href="{{path('app_register')}}" class="btn btn-info login">Crear cuenta</a>
+  {% endif %}
+  {% if app.user %}
+  <span>{{app.user.username}}</span>
+  <a href="{{path('app_logout')}}" class="btn btn-info login">Cerrar sesión</a>
+  {% endif %}
+</nav>

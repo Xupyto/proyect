@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+{% if blocked %}
+    {{ form_row(form.pokemonIdpoke, {attr:{'disabled' : true}}) }}
+    {{ form_row(form.formato, {attr:{'disabled' : true}}) }}
+{% endif %}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}

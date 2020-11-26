@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formato index{% endblock %}
+
+{% block body %}
+    <h1>Listado de formatos</h1>
+
+     <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formato in formatos %}
+            <tr>
+                <td>{{ formato.id }}</td>
+                <td>{{ formato.nombre }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('formato_show', {'id': formato.id}) }}">Mostrar</a>
+                    <a class="btn btn-primary" href="{{ path('formato_edit', {'id': formato.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No hay formatos</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(formatos) }}
+</div>
+
+    <a class="btn btn-primary" href="{{ path('formato_new') }}">Crear nuevo</a>
+{% endblock %}

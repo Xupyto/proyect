@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edición de pokémon{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar pokémon</h1>
+
+    {{ include('poke/_form.html.twig', {'button_label': 'Actualizar'}) }}
+    
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PokePuedeAprenderMov{% endblock %}
+
+{% block body %}
+    <h1>Create new PokePuedeAprenderMov</h1>
+
+    {{ include('poke_puede_aprender_mov/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('poke_puede_aprender_mov_index') }}">Volver al listado</a>
+{% endblock %}

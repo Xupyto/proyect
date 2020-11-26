@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movimiento index{% endblock %}
+
+{% block body %}
+    <h1>Movimiento index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdMov</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for movimiento in movimientos %}
+            <tr>
+                <td>{{ movimiento.idMov }}</td>
+                <td>{{ movimiento.nombre }}</td>
+                <td>
+                    <a href="{{ path('movimiento_show', {'idMov': movimiento.idMov}) }}">show</a>
+                    <a href="{{ path('movimiento_edit', {'idMov': movimiento.idMov}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(movimientos) }}
+</div>
+
+    <a href="{{ path('movimiento_new') }}">Create new</a>
+{% endblock %}

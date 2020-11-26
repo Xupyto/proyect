@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PokePuedeAprenderMov index{% endblock %}
+
+{% block body %}
+    <h1>Listado de ataques aprendidos por pokemon</h1>
+
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Movimiento</th>
+                <th>Formato</th>
+                <th>PorcentajeUso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poke_puede_aprender_mov in poke_puede_aprender_movs %}
+            <tr>
+                <td>{{ poke_puede_aprender_mov.pokemonIdpoke.nombre }}</td>
+                <td>{{ poke_puede_aprender_mov.movimiento.nombre }}</td>
+                <td>{{ poke_puede_aprender_mov.formato.nombre }}</td>
+                <td>{{ poke_puede_aprender_mov.porcentajeUso }} %</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('poke_puede_aprender_mov_edit', {'formato': poke_puede_aprender_mov.formato.id, 'poke': poke_puede_aprender_mov.pokemonIdpoke.idpoke,
+                     'mov': poke_puede_aprender_mov.movimiento.idmov, 'porcentaje': poke_puede_aprender_mov.porcentajeUso}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(poke_puede_aprender_movs) }}
+</div>
+
+
+    <a class="btn btn-primary" href="{{ path('poke_puede_aprender_mov_new') }}">Crear nuevo</a>
+{% endblock %}
