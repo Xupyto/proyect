@@ -47,7 +47,7 @@ class Pokemon_aprende_movRepository extends ServiceEntityRepository
             ->setParameter('val4', $porcentaje)
             ->getQuery()
             ->getResult()
-            ;    
+            ;    s
     }
     
     
