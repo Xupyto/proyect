@@ -23,16 +23,39 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PokeController extends AbstractController
 {
+
     /**
      * @Route("/", name="poke_index", methods={"GET"})
      */
-    public function index(PaginatorInterface $paginator, Request $request)
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
+            
+            $pokes = $this->getDoctrine()
+            ->getRepository(Pokemon::class)
+            ->findAll();
 
+            $pagination = $paginator->paginate(
+                $pokes,
+                $request->query->getInt("page", 1),
+                10
+            );
+
+            return $this->render('poke/inicio.html.twig', [
+                'pokes' => $pagination,
+            ]);
+    }
+    /**
+     * 
+     * @Route("/filtroformato", name="filtrar_formato", methods={"GET","POST"})
+     */
+    public function index_filtro(PaginatorInterface $paginator, Request $request)
+    {
+        $filtro = $request->get("format");
+        
         $em = $this->getDoctrine()->getManager();
-        $pokemons = $em->getRepository(PokemonEstaEnFormato::class)->findByIdFormat(1);
-        $format = $em->getRepository(Formato::class)->findById(1);
-
+        $pokemons = $em->getRepository(PokemonEstaEnFormato::class)->findByIdFormat($filtro);
+        $format = $em->getRepository(Formato::class)->findById($filtro);
+        
         $mensaje = "Formato ".$pokemons[0]->getFormato()->getNombre();
         $pokes = [];
         foreach ( $pokemons as $pokeisformat)
@@ -49,9 +72,9 @@ class PokeController extends AbstractController
         $pagination = $paginator->paginate(
             $pokes,
             $request->query->getInt("page", 1),
-            10
+            5
         );
-        
+       
 
         return $this->render('poke/index.html.twig', [
             'pokes' => $pagination,
@@ -68,50 +91,7 @@ class PokeController extends AbstractController
 
         return $this->render('shared/filtroformato.html.twig', ["formatos" => $formatos]);
     }
-    /**
-     * @Route("/filtrado", name="filtrar_formato", methods={"GET","POST"})
-     */
     
-    public function pokemon_filtrados(PaginatorInterface $paginator, Request $request){
-       
-        $filtro = $request->get("format");
-
-        if ($filtro == null) {
-            return $this->redirectToRoute("poke_index");
-        } else {
-           
-            $em = $this->getDoctrine()->getManager();
-            $pokemons = $em->getRepository(PokemonEstaEnFormato::class)->findByIdFormat($filtro);
-
-            $mensaje = "Formato ".$pokemons[0]->getFormato()->getNombre();
-            $pokes = [];
-            foreach ( $pokemons as $pokeisformat)
-            {
-                $pokes [] = $pokeisformat->getPokemonIdpoke();
-            }
-
-            $porcentajes = [];
-        
-            for($i = 0; $i<sizeof($pokes);$i++){
-                $porcentajes []= $em->getRepository(PokemonEstaEnFormato::class)->findById($pokes[$i]->getIdpoke());
-            }
-
-            $pagination = $paginator->paginate(
-                $pokes,
-                $request->query->getInt("page", 1),
-                10
-            );
-
-            $format = $em->getRepository(Formato::class)->findById($filtro);
-
-            return $this->render('poke/index.html.twig', [
-                'pokes' => $pagination,
-                'porcentajes' => $porcentajes,
-                'filtro' => "$mensaje",
-                'format' => $format
-            ]);
-        }
-    }
 
 
 
@@ -268,9 +248,11 @@ class PokeController extends AbstractController
 
     /**
      * @Route("/pokedex/{idpoke}/{format}", name="poke_show", methods={"GET"}) 
+     * 
+     * @Route("/pokedex/{idpoke}", name="poke_show_in", methods={"GET"}) 
      *  
      */
-    public function showPoke(Pokemon $poke, Formato $format): Response
+    public function showPoke(Pokemon $poke, Formato $format=null ): Response
     {
         
         $estadisticas = [];
@@ -285,7 +267,7 @@ class PokeController extends AbstractController
          $companeros = $em->getRepository(PokemonTienePartner::class)->findById($poke->getIdpoke());
          $spreads = $em->getRepository(PokemonTieneSpread::class)->findById($poke->getIdpoke());
         
-
+        
         return $this->render('shared/contenido.html.twig', [
             'pokemon' => $poke,
             'mayor' => $mayor,
@@ -296,5 +278,6 @@ class PokeController extends AbstractController
             'spreads' => $spreads,
             'format' => $format
         ]);
+        
     }
 }

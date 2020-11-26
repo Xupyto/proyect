@@ -2,6 +2,7 @@
 <form action="{{path('filtrar_formato')}}" method="POST">
     <div>
         <select name="format">
+            <option value="">Seleccione un formato</option>
           {% for format in formatos %}
             <option value ="{{format.id}}">{{format.nombre}}</option>
           {% else %}
