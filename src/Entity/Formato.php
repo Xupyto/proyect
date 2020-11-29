@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Formato
@@ -35,16 +36,41 @@ class Formato
     * @ORM\OneToMany(targetEntity="PokemonEstaEnFormato", mappedBy="formato", cascade={"all"})
     *
     */
-    private $formatotienepokes; 
+    private $formathaspoke;
 
-    public function getFormatoTienepokes(): ?PokemonEstaEnFormato
+     /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->formatotienepokes;
+        $this->formathaspoke = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function setPoketieneformat(PokemonEstaEnFormato $pokeisformat): self
+   /**
+     * @return Collection|Pokemon[]
+     */
+    public function getformathaspoke(): Collection
     {
-        $this->formatotienepokes = $pokeisformat;
+        return $this->formathaspoke;
+    }
+
+    public function addformathaspoke(Pokemon $formathaspoke): self
+    {
+        if (!$this->formathaspoke->contains($formathaspoke)) {
+            $this->formathaspoke[] = $formathaspoke;
+            $formathaspoke->addFormat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeformathaspoke(Pokemon $formathaspoke): self
+    {
+        if ($this->formathaspoke->contains($formathaspoke)) {
+            $this->formathaspoke->removeElement($formathaspoke);
+            $formathaspoke->removeFormat($this);
+        }
+
         return $this;
     }
 

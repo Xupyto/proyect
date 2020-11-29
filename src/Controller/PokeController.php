@@ -192,12 +192,9 @@ class PokeController extends AbstractController
 
             return $this->redirectToRoute('poke_index');
         }
-        $em = $this->getDoctrine()->getManager();
-        $pokeisinformat = $em->getRepository(PokemonEstaEnFormato::class)->findById($poke->getIdpoke());
-        
+    
         return $this->render('poke/edit.html.twig', [
             'poke' => $poke,
-            'format' => $pokeisinformat,
             'form' => $form->createView(),
         ]);
     }

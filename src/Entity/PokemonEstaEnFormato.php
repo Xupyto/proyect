@@ -22,26 +22,26 @@ class PokemonEstaEnFormato
     private $porcentajeUso;
 
     /**
-     * @var \Formato
+     * Bidirectional - muchos a uno (OWNING SIDE)
+     *
      *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Formato")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Formato_id", referencedColumnName="Id")
-     * })
+     * @ORM\ManyToOne(targetEntity="Formato", inversedBy="formathaspoke")
+     * @ORM\JoinColumn(name="Formato_Id", referencedColumnName="Id",
+     * columnDefinition="bigint COMMENT 'En un formato hay muchos pokes'", nullable=false, onDelete="CASCADE")
+     *
      */
     private $formato;
 
     /**
-     * @var \Pokemon
+     * Bidirectional - muchos a uno (OWNING SIDE)
+     *
      *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Pokemon")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Pokemon_Idpoke", referencedColumnName="Idpoke")
-     * })
+     * @ORM\ManyToOne(targetEntity="Pokemon", inversedBy="poketieneformat")
+     * @ORM\JoinColumn(name="Pokemon_Idpoke", referencedColumnName="Idpoke",
+     * columnDefinition="bigint COMMENT 'Un pokemon tiene muchos formatos'", nullable=false, onDelete="CASCADE")
+     *
      */
     private $pokemonIdpoke;
 
@@ -79,6 +79,16 @@ class PokemonEstaEnFormato
         $this->pokemonIdpoke = $pokemonIdpoke;
 
         return $this;
+    }
+
+    /**
+     * Al recuperar el objeto desde Participants, se devuelve __toString con el nombre del premio
+     *
+     */
+    public function __toString()
+    {
+            return $this->getFormato()->getNombre();
+        
     }
 
 

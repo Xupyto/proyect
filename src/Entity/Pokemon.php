@@ -139,7 +139,6 @@ class Pokemon
      */
     private $tipoNombre;
 
-
     /**
     *  Bidirectional - uno a muchos (INVERSE SIDE) Para poner atributos extras en una relación N-M
     *
@@ -148,16 +147,6 @@ class Pokemon
     */
     private $poketieneformat;
 
-    public function getPoketieneformat(): ?PokemonEstaEnFormato
-    {
-        return $this->poketieneformat;
-    }
-
-    public function setPoketieneformat(PokemonEstaEnFormato $pokeisformat): self
-    {
-        $this->poketieneformat = $pokeisformat;
-        return $this;
-    }
 
     /**
      * Constructor
@@ -165,6 +154,7 @@ class Pokemon
     public function __construct()
     {
         $this->tipoNombre = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->poketieneformat = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getIdpoke(): ?int
@@ -290,6 +280,32 @@ class Pokemon
     {
         if ($this->tipoNombre->contains($tipoNombre)) {
             $this->tipoNombre->removeElement($tipoNombre);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tipo[]
+     */
+    public function getFormats(): Collection
+    {
+        return $this->poketieneformat;
+    }
+
+    public function addFormat(Formato $format): self
+    {
+        if (!$this->poketieneformat->contains($format)) {
+            $this->poketieneformat[] = $format;
+        }
+
+        return $this;
+    }
+
+    public function removeFormat(Formato $format): self
+    {
+        if ($this->poketieneformat->contains($format)) {
+            $this->poketieneformat->removeElement($format);
         }
 
         return $this;
