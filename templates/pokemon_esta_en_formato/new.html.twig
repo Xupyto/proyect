@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Pokemon - Formato{% endblock %}
+
+{% block body %}
+    <h1>Nuevo Pokemon - Formato</h1>
+
+    {{ include('pokemon_esta_en_formato/_form.html.twig') }}
+
+    <a class="btn btn-primary"  href="{{ path('pokemon_esta_en_formato_index') }}">Volver al listado</a>
+{% endblock %}

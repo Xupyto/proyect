@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Movimiento index{% endblock %}
+{% block title %}Listado movimientos{% endblock %}
 
 {% block body %}
-    <h1>Movimiento index</h1>
+    <h1 class="titulo">Listado movimientos</h1>
 
-    <table class="table">
+    <table class="table table-hover table-dark titulo">
         <thead>
             <tr>
-                <th>IdMov</th>
+                <th>Id Movimiento</th>
                 <th>Nombre</th>
-                <th>actions</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -18,14 +19,16 @@
             <tr>
                 <td>{{ movimiento.idMov }}</td>
                 <td>{{ movimiento.nombre }}</td>
+                <td>{{ movimiento.tiponombre.nombre }}</td>
                 <td>
-                    <a href="{{ path('movimiento_show', {'idMov': movimiento.idMov}) }}">show</a>
-                    <a href="{{ path('movimiento_edit', {'idMov': movimiento.idMov}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('movimiento_edit', {'idMov': movimiento.idMov}) }}">Editar</a>
+                    
+                    {{ include('movimiento/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4">No hay resultados.</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -35,5 +38,5 @@
     {{ knp_pagination_render(movimientos) }}
 </div>
 
-    <a href="{{ path('movimiento_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('movimiento_new') }}">Crear nuevo</a>
 {% endblock %}

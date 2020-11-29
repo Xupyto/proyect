@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Movimiento{% endblock %}
+{% block title %}Editar movimiento{% endblock %}
 
 {% block body %}
-    <h1>Edit Movimiento</h1>
+    <h1>Editar movimiento</h1>
 
-    {{ include('movimiento/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('movimiento/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
-    <a href="{{ path('movimiento_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('movimiento_index') }}">Volver al listado</a>
 
-    {{ include('movimiento/_delete_form.html.twig') }}
 {% endblock %}

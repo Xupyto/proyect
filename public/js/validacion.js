@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+
     $("#crearpokes").validate({
         rules: {
             'poke[nombre]' : {
@@ -41,7 +43,7 @@ $(document).ready(function() {
                  min: 1,
                 max: 200
             },
-            'poke[Fileimg]' : {
+           /* 'poke[Fileimg]' : {
                 required: true,
                 accept: "image/png"
             },
@@ -53,9 +55,9 @@ $(document).ready(function() {
                 number: true,
                 min: 0.01,
                 max: 100
-            },
-            'poke[tipo1]' : {
-                required: true
+            },*/
+            'poke[tipoNombre][]' : {
+                required: true,
             },
         },
         messages : {
@@ -99,7 +101,7 @@ $(document).ready(function() {
                 min: "Debes introducir un valor mayor a 1.",
                 max: "Debes introducir un valor menor a 200."
             },
-            'poke[Fileimg]' : {
+           /* 'poke[Fileimg]' : {
                 required: "Debes subir una foto.",
                 accept: "El formato de la imagen debe ser png."
             },
@@ -111,9 +113,9 @@ $(document).ready(function() {
                 number: "Solo puedes introducir números.",
                 min: "Debes introducir un valor mayor a 0.01.",
                 max: "Debes introducir un valor menor a 100."
-            },
-            'poke[tipo1]' : {
-                required: "No puedes dejar este campo vacío.",
+            },*/
+            'poke[tipoNombre][]' : {
+                required: "Debe seleccionar 1 o 2 tipos."
             },
         }
     });

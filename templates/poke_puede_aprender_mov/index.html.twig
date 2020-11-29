@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PokePuedeAprenderMov index{% endblock %}
+{% block title %}Listado de ataques aprendidos por pokemon{% endblock %}
 
 {% block body %}
-    <h1>Listado de ataques aprendidos por pokemon</h1>
+    <h1 class="titulo">Listado de ataques aprendidos por pokemon</h1>
 
-    <table class="table table-hover table-dark">
+    <table class="table table-hover table-dark titulo">
         <thead>
             <tr>
                 <th>Pokemon</th>
@@ -30,7 +30,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">No hay resultados.</td>
             </tr>
         {% endfor %}
         </tbody>

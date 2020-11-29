@@ -46,24 +46,7 @@ class PokeType extends AbstractType
                    
                 ]
             ])
-            ->add('formato', EntityType::class, [
-                'class' => Formato::class, 'placeholder' => 'Elige un formato',
-                'mapped' => false,
-            ])
-            ->add('porcentajeuso', NumberType::class,[
-                'mapped' => false,
-                'required' => true,
-            ])
-            ->add('tipo1', EntityType::class, [
-                'class' => Tipo::class, 'placeholder' => 'Elige el tipo primario',
-                'mapped' => false,
-                'required' => true,
-            ])
-            ->add('tipo2', EntityType::class, [
-                'class' => Tipo::class, 'placeholder' => 'Elige el tipo secundario',
-                'mapped' => false,
-                'required' => false,
-            ])
+            ->add('tipoNombre')
             
         ;
     }

@@ -126,6 +126,7 @@ class Pokemon
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     * @Assert\Count(max=2)
      *
      * @ORM\ManyToMany(targetEntity="Tipo", inversedBy="pokemonIdpoke")
      * @ORM\JoinTable(name="pokemon_tiene_tipo",
@@ -285,6 +286,13 @@ class Pokemon
         return $this;
     }
 
+    public function removeTipos(): self
+    {
+        unset($this->tipoNombre);
+        $this->tipoNombre = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this;
+    }
+
     /**
      * @return Collection|Tipo[]
      */
@@ -316,4 +324,5 @@ class Pokemon
         return $this->nombre;
     }
 
+    
 }

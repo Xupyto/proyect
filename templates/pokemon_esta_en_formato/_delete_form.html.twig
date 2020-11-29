@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('pokemon_esta_en_formato_delete', {'formato': pokemon_esta_en_formato.formato.id, 'poke': pokemon_esta_en_formato.pokemonIdpoke.idpoke}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary">Borrar</button>
+</form>

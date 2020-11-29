@@ -123,23 +123,26 @@ class PokeController extends AbstractController
                 $poke->setFoto($nombrearchivo);
             }
             //Rellenamos la tabla pokemon y pokemon tiene tipo
-            $poke->addTipoNombre($form['tipo1']->getData());
+            $poke->removeTipos();
+            
+            $poke->addTipoNombre($form['tipoNombre']->getData()[0]);
+           
 
-            if($form['tipo2']->getData() != null){
-                $poke->addTipoNombre($form['tipo2']->getData());
+            if($form['tipoNombre']->getData()[1] != null){
+                $poke->addTipoNombre($form['tipoNombre']->getData()[1]);
             }
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($poke);
             $entityManager->flush();
-            //Rellenamos la tabla pokemon tiene formato
+            /*Rellenamos la tabla pokemon tiene formato
             $pokeisformat = new PokemonEstaEnFormato();
             $pokeisformat->setFormato($form['formato']->getData());
             $pokeisformat->setPokemonIdpoke($poke);
             $pokeisformat->setPorcentajeUso($form['porcentajeuso']->getData());
 
             $entityManager->persist($pokeisformat);
-            $entityManager->flush();
+            $entityManager->flush();*/
 
             return $this->redirectToRoute('poke_index');
         }
@@ -172,23 +175,27 @@ class PokeController extends AbstractController
                 $poke->setFoto($nombrearchivo);
             }
             //Rellenamos la tabla pokemon y pokemon tiene tipo
-            $poke->addTipoNombre($form['tipo1']->getData());
+            
+            $poke->removeTipos();
+            var_dump($form['tipoNombre']->getData());
+            $poke->addTipoNombre($form['tipoNombre']->getData()[0]);
+           
 
-            if($form['tipo2']->getData() != null){
-                $poke->addTipoNombre($form['tipo2']->getData());
+            if($form['tipoNombre']->getData()[1] != null){
+                $poke->addTipoNombre($form['tipoNombre']->getData()[1]);
             }
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($poke);
             $entityManager->flush();
-            //Rellenamos la tabla pokemon tiene formato
+            /*Rellenamos la tabla pokemon tiene formato
             $pokeisformat = new PokemonEstaEnFormato();
             $pokeisformat->setFormato($form['formato']->getData());
             $pokeisformat->setPokemonIdpoke($poke);
             $pokeisformat->setPorcentajeUso($form['porcentajeuso']->getData());
 
             $entityManager->persist($pokeisformat);
-            $entityManager->flush();
+            $entityManager->flush();*/
 
             return $this->redirectToRoute('poke_index');
         }
@@ -283,4 +290,5 @@ class PokeController extends AbstractController
         ]);
         
     }
+
 }

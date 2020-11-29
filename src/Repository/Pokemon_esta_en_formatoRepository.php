@@ -45,6 +45,18 @@ class Pokemon_esta_en_formatoRepository extends ServiceEntityRepository
 
             
     }
+
+    public function findByManyFields($format, $poke)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.formato = :val1')
+            ->andWhere('p.pokemonIdpoke = :val2')
+            ->setParameter('val1', $format)
+            ->setParameter('val2', $poke)
+            ->getQuery()
+            ->getResult()
+            ;    
+    }
     
     
 

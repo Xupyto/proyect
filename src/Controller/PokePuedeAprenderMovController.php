@@ -62,15 +62,6 @@ class PokePuedeAprenderMovController extends AbstractController
     }
 
 
-    /**
-     * @Route("/{formato}", name="poke_puede_aprender_mov_show", methods={"GET"})
-     */
-    public function show(PokePuedeAprenderMov $pokePuedeAprenderMov): Response
-    {
-        return $this->render('poke_puede_aprender_mov/show.html.twig', [
-            'poke_puede_aprender_mov' => $pokePuedeAprenderMov,
-        ]);
-    }
 
     /**
      * @Route("/edit/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_edit", methods={"GET","POST"})
