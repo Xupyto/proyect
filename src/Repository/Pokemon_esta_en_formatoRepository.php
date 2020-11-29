@@ -42,6 +42,8 @@ class Pokemon_esta_en_formatoRepository extends ServiceEntityRepository
             ->orderBy('p.porcentajeUso', 'DESC')
             ->getQuery()
             ->getResult();
+
+            
     }
     
     

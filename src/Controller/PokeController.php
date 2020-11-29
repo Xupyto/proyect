@@ -50,11 +50,17 @@ class PokeController extends AbstractController
      */
     public function index_filtro(PaginatorInterface $paginator, Request $request)
     {
+        $session = $request->getSession();
         $filtro = $request->get("format");
-        
+
+        if($filtro != null){
+            $session->set('filtro', $filtro);
+        }
+       
+
         $em = $this->getDoctrine()->getManager();
-        $pokemons = $em->getRepository(PokemonEstaEnFormato::class)->findByIdFormat($filtro);
-        $format = $em->getRepository(Formato::class)->findById($filtro);
+        $pokemons = $em->getRepository(PokemonEstaEnFormato::class)->findByIdFormat($session->get('filtro'));
+        $format = $em->getRepository(Formato::class)->findById($session->get('filtro'));
         
         $mensaje = "Formato ".$pokemons[0]->getFormato()->getNombre();
         $pokes = [];

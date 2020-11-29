@@ -139,7 +139,25 @@ class Pokemon
      */
     private $tipoNombre;
 
-    
+
+    /**
+    *  Bidirectional - uno a muchos (INVERSE SIDE) Para poner atributos extras en una relación N-M
+    *
+    * @ORM\OneToMany(targetEntity="PokemonEstaEnFormato", mappedBy="pokemonIdpoke", cascade={"all"})
+    *
+    */
+    private $poketieneformat;
+
+    public function getPoketieneformat(): ?PokemonEstaEnFormato
+    {
+        return $this->poketieneformat;
+    }
+
+    public function setPoketieneformat(PokemonEstaEnFormato $pokeisformat): self
+    {
+        $this->poketieneformat = $pokeisformat;
+        return $this;
+    }
 
     /**
      * Constructor

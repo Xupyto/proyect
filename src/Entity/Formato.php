@@ -28,6 +28,26 @@ class Formato
      */
     private $nombre;
 
+
+    /**
+    *  Bidirectional - uno a muchos (INVERSE SIDE) Para poner atributos extras en una relación N-M
+    *
+    * @ORM\OneToMany(targetEntity="PokemonEstaEnFormato", mappedBy="formato", cascade={"all"})
+    *
+    */
+    private $formatotienepokes; 
+
+    public function getFormatoTienepokes(): ?PokemonEstaEnFormato
+    {
+        return $this->formatotienepokes;
+    }
+
+    public function setPoketieneformat(PokemonEstaEnFormato $pokeisformat): self
+    {
+        $this->formatotienepokes = $pokeisformat;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

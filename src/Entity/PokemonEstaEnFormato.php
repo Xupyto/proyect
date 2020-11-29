@@ -16,7 +16,7 @@ class PokemonEstaEnFormato
      * @var float
      *
      * @ORM\Column(name="Porcentaje_uso", type="float", precision=10, scale=0, nullable=false)
-     * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $porcentajeUso;
