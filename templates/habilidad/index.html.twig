@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado habilidades{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Listado habilidades</h1>
+
+    <table class="table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Id habilidad</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for habilidad in habilidads %}
+            <tr>
+                <td>{{ habilidad.idhabilidad }}</td>
+                <td>{{ habilidad.nombre }}</td>
+                <td>     
+                    <a class="btn btn-primary" href="{{ path('habilidad_edit', {'idhabilidad': habilidad.idhabilidad}) }}">Editar</a>
+                     {{ include('habilidad/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+         {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(habilidads) }}
+</div>
+
+    <a class="btn btn-primary" href="{{ path('habilidad_new') }}">Crear nuevo</a>
+{% endblock %}

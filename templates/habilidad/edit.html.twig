@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar habilidad{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar habilidad</h1>
+
+    {{ include('habilidad/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a class="btn btn-primary" href="{{ path('habilidad_index') }}">Volver al listado</a>
+
+   
+{% endblock %}

@@ -19,13 +19,23 @@
       {% if is_granted('ROLE_ADMIN') %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Mantenimiento
+          Mantenimiento simple
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{path('formato_index')}}">Formato</a>
+          <a class="dropdown-item" href="{{path('movimiento_index')}}">Movimiento</a>
+          <a class="dropdown-item" href="{{path('objeto_index')}}">Objeto</a>
+          <a class="dropdown-item" href="{{path('habilidad_index')}}">Habilidad</a>
+          <a class="dropdown-item" href="{{path('spread_index')}}">Spread</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mantenimiento relaciones
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{path('pokemon_esta_en_formato_index')}}">Pokemon - Formato</a>
-          <a class="dropdown-item" href="{{path('poke_puede_aprender_mov_index')}}">Pokemon puede aprender movs</a>
-          <a class="dropdown-item" href="{{path('formato_index')}}">Formato</a>
-          <a class="dropdown-item" href="{{path('movimiento_index')}}">Movimiento</a>
+          <a class="dropdown-item" href="{{path('poke_puede_aprender_mov_index')}}">Pokemon - Movimiento</a>
         </div>
       </li>
       {% endif %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar objeto{% endblock %}
+
+{% block body %}
+    <h1>Editar objeto</h1>
+
+    {{ include('objeto/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a class="btn btn-primary" href="{{ path('objeto_index') }}">Volver al listado</a>
+
+{% endblock %}

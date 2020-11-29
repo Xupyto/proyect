@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +25,7 @@ class Spread
 
     /**
      * @var string
-     *
+     * @Assert\Regex(pattern="/^[A-Z][a-z]+ \d{1,3}\/\d{1,3}\/\d{1,3}\/\d{1,3}\/\d{1,3}\/\d{1,3}/")
      * @ORM\Column(name="Stats", type="string", length=100, nullable=false)
      */
     private $stats;

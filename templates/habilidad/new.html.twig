@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva habilidad{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Crear nueva habilidad</h1>
+
+    {{ include('habilidad/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('habilidad_index') }}">Volver al listado</a>
+{% endblock %}

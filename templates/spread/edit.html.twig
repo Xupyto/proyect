@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar spread{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar spread</h1>
+
+    {{ include('spread/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a class="btn btn-primary" href="{{ path('spread_index') }}">Volver al listado</a>
+
+    
+{% endblock %}

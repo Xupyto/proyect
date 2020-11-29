@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Spread{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Crear nuevo spread</h1>
+
+    {{ include('spread/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('spread_index') }}">Volver al listado</a>
+{% endblock %}
