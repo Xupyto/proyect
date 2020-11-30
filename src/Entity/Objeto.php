@@ -27,7 +27,7 @@ class Objeto
     /**
      * @var string
      * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
-     * @Assert\Length(min=5,max=40,minMessage="Longitud mínima 5 caracteres",maxMessage="Longitud máxima 40 carácteres")
+     * @Assert\Length(min=2,max=40,minMessage="Longitud mínima 2 caracteres",maxMessage="Longitud máxima 40 carácteres")
      * @Assert\Regex(
      *      pattern="/^[ÁÉÍÓÚA-Z]+/",
      *      message="El valor no puede ser un valor numérico/no emmpieza por mayúscula."
