@@ -43,7 +43,7 @@
     {{ knp_pagination_render(pokes) }}
 </div>
     {% if is_granted('ROLE_ADMIN') %}
-    <a class="btn btn-primary" href="{{ path('poke_new') }}">Crear nuevo poke</a>
+    <a class="btn btn-primary crear" href="{{ path('poke_new') }}">Crear nuevo poke</a>
  {% endif %}
 
 {% endblock %}

@@ -58,15 +58,6 @@ class FormatoController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="formato_show", methods={"GET"})
-     */
-    public function show(Formato $formato): Response
-    {
-        return $this->render('formato/show.html.twig', [
-            'formato' => $formato,
-        ]);
-    }
 
     /**
      * @Route("/{id}/edit", name="formato_edit", methods={"GET","POST"})

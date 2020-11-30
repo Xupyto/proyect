@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Formato{% endblock %}
+{% block title %}Editar formato{% endblock %}
 
 {% block body %}
-    <h1>Edit Formato</h1>
+    <h1 class="titulo">Editar formato</h1>
 
     {{ include('formato/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
     <a class="btn btn-primary" href="{{ path('formato_index') }}">Volver al listado</a>
 
-    {{ include('formato/_delete_form.html.twig') }}
+    
 {% endblock %}

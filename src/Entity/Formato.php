@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Formato
  *
  * @ORM\Table(name="formato", uniqueConstraints={@ORM\UniqueConstraint(name="Nombre_UNIQUE", columns={"Nombre"})})
  * @ORM\Entity(repositoryClass="App\Repository\FormatoRepository")
+ * @UniqueEntity(fields={"nombre"}, message="Ya hay un formato que se llama así.")
  */
 class Formato
 {
@@ -24,7 +27,12 @@ class Formato
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @Assert\Length(min=2,max=20,minMessage="Longitud mínima 2 caracteres",maxMessage="Longitud máxima 20 carácteres")
+     * @Assert\Regex(
+     *      pattern="/^[ÁÉÍÓÚA-Z]+/",
+     *      message="El valor no puede ser un valor numérico/no emmpieza por mayúscula."
+     * )
      * @ORM\Column(name="Nombre", type="string", length=20, nullable=false)
      */
     private $nombre;

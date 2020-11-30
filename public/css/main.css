@@ -45,7 +45,7 @@ table.titulo {
     font-weight: bold;
 }
 
-form[name="poke"] {
+form[name="poke"], form.mantenimiento {
     background-color: burlywood;
     border-radius: 2em;
     padding: 2em;
@@ -60,6 +60,10 @@ form[name="poke"] button {
 
 .errores, .error {
     color: red;
+}
+
+a.crear {
+    margin-left: 45%;
 }
 
 

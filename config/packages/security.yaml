@@ -41,8 +41,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/planta/*/edit, roles: ROLE_ADMIN }
-        # - { path: ^/planta/new, roles: ROLE_ADMIN }
-
-
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/formato, roles: ROLE_ADMIN }
+         - { path: ^/movimiento, roles: ROLE_ADMIN }
+         - { path: ^/objeto, roles: ROLE_ADMIN }
+         - { path: ^/habilidad, roles: ROLE_ADMIN }
+         - { path: ^/spread, roles: ROLE_ADMIN }
+         - { path: ^/pokemon, roles: ROLE_ADMIN }
+         - { path: ^/poke/\w+, roles: ROLE_ADMIN }
