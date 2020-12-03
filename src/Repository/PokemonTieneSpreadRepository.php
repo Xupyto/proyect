@@ -34,7 +34,19 @@ class PokemonTieneSpreadRepository extends ServiceEntityRepository
         ;
     }
     
-    
+    public function findByManyFields($format, $poke, $spread)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.formato = :val1')
+            ->andWhere('p.pokemonIdpoke = :val2')
+            ->andWhere('p.spreadIdspread = :val3')
+            ->setParameter('val1', $format)
+            ->setParameter('val2', $poke)
+            ->setParameter('val3', $spread)
+            ->getQuery()
+            ->getResult()
+            ;    
+    }
 
     /*
     public function findOneBySomeField($value): ?Pokemon

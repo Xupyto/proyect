@@ -1,11 +1,12 @@
-{{ form_start(form, {attr:{'class' : 'mantenimiento', 'id':'pokemovformatform'}}) }}
+{{ form_start(form, {attr:{'class' : 'mantenimiento', 'id':'pokehabformatform'}}) }}
 {% if blocked %}
 <div class="ocultate">
     {{ form_row(form.pokemonIdpoke) }}
     {{ form_row(form.formato) }}
 </div>
+
 {% endif %}
     {{ form_widget(form) }}
     {{form_errors(form.formato)}}
-    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+   <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

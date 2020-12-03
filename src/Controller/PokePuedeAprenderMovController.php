@@ -83,7 +83,7 @@ class PokePuedeAprenderMovController extends AbstractController
         }
 
         return $this->render('poke_puede_aprender_mov/edit.html.twig', [
-            'poke_puede_aprender_mov' => $pokePuedeAprenderMov,
+            'poke_puede_aprender_mov' => $hola,
             'form' => $form->createView(),
             'blocked' => false
         ]);

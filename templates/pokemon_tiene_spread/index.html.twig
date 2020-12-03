@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de spread usados en pokemon{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Listado de spread usados en pokemon</h1>
+
+    <table class="table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Spread</th>
+                <th>Formato</th>
+                <th>Porcentaje uso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pokemon_tiene_spread in pokemon_tiene_spreads %}
+            <tr>
+                <td>{{ pokemon_tiene_spread.pokemonIdpoke.nombre }}</td>
+                <td>{{ pokemon_tiene_spread.spreadIdspread.stats }}</td>
+                <td>{{ pokemon_tiene_spread.formato.nombre }}</td>
+                <td>{{ pokemon_tiene_spread.porcentajeUso }} %</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('pokemon_tiene_spread_edit', {'formato': pokemon_tiene_spread.formato.id, 'poke': pokemon_tiene_spread.pokemonIdpoke.idpoke,
+'spread': pokemon_tiene_spread.spreadIdspread.idspread}) }}">Editar</a>
+                     {{ include('pokemon_tiene_spread/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+               <td colspan="5">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pokemon_tiene_spreads) }}
+</div>
+
+    <a class="btn btn-primary crear" href="{{ path('pokemon_tiene_spread_new') }}">Crear nuevo</a>
+{% endblock %}

@@ -54,7 +54,7 @@
             </li>
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null  %}
-           <a class="btn btn-primary" href="{{ path('poke_edit', {'idpoke': pokemon.idpoke}) }}">Editar</a>
+           <a class="btn btn-primary anadir" href="{{ path('poke_edit', {'idpoke': pokemon.idpoke}) }}">Editar</a>
         {% endif %}
     </div>
     <div class="col-sm-4">
@@ -62,13 +62,14 @@
         <ul class="list-group">
         {% set i = 0 %}
         {% for a in ataques %}
-            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25" class="show" src="{{ asset('imagenes/tipos//'~ ataques[i].movimiento.tipoNombre.nombre ) }}" alt="{{ataques[i].movimiento.tipoNombre.nombre}}"> - {{ataques[i].porcentajeUso}} %</li>
-            
+            {% if i < 5 %}
+            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25" class="show" src="{{ asset('imagenes/tipos//'~ a.movimiento.tipoNombre.nombre ) }}" alt="{{a.movimiento.tipoNombre.nombre}}"> - {{a.porcentajeUso}} %</li>
+             {% endif %} 
              {% set i = i+1 %}
         {% endfor %}
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null %}
-           <a class="btn btn-primary" href="{{ path('anadir_mov', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
+           <a class="btn btn-primary anadir" href="{{ path('anadir_mov', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %} 
     </div>
     <div class="col-sm-4">
@@ -76,12 +77,15 @@
         <ul class="list-group">
         {% set i = 0 %}
         {% for object in objetos %}
-            <li class="list-group-item">{{objetos[i].objetoIdobjeto.nombre}} - {{objetos[i].porcentajeUso}} %</li>
+         {% if i < 5 %}
+            <li class="list-group-item">{{object.objetoIdobjeto.nombre}} - {{object.porcentajeUso}} %</li>
+             {% endif %} 
              {% set i = i+1 %}
         {% endfor %}
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null %}
-            <button>Editar</button>
+           <a class="btn btn-primary anadir" href="{{ path('anadir_obj', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
+           
         {% endif %}
     </div>
 </div>
@@ -92,12 +96,14 @@
         <ul class="list-group">
         {% set i = 0 %}
         {% for hab in habilidades %}
-            <li class="list-group-item">{{habilidades[i].habilidad.nombre}} - {{habilidades[i].porcentajeUso}} %</li>
+             {% if i < 3 %}
+            <li class="list-group-item">{{hab.habilidad.nombre}} - {{hab.porcentajeUso}} %</li>
+            {% endif %}
              {% set i = i+1 %}
         {% endfor %}
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null %}
-            <button>Editar</button>
+           <a class="btn btn-primary anadir" href="{{ path('anadir_hab', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
         <div class="col-sm-4">
@@ -105,26 +111,31 @@
         <ul class="list-group">
         {% set i = 0 %}
         {% for comp in companeros %}
-        
+             {% if i < 5 %}
             <li class="list-group-item">
-            <img width="50" heigh="25" class="show" src="{{ asset('imagenes//'~ companeros[i].pokemonIdpoke1.nombre) }}" alt="{{companeros[i].pokemonIdpoke1.nombre}}">
-            {{companeros[i].pokemonIdpoke1.nombre}} - {{companeros[i].porcentajeUso}} %</li>
+            <img width="50" heigh="25" class="show" src="{{ asset('imagenes//'~ comp.pokemonIdpoke1.nombre|replace({' ': ''})) }}" alt="{{comp.pokemonIdpoke1.nombre}}">
+           {{comp.pokemonIdpoke1.nombre}} - {{comp.porcentajeUso}} %</li>
+            {% endif %}
              {% set i = i+1 %}
         {% endfor %}
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null %}
-            <button>Editar</button>
+           <a class="btn btn-primary anadir" href="{{ path('anadir_partner', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
         <div class="col-sm-4">
         <h1>Spread</h1>
         <ul class="list-group">
+        {% set i = 0 %}
         {% for spread in spreads %}
+        {% if i < 5 %}
             <li class="list-group-item">{{spread.spreadIdspread.stats}} - {{spread.porcentajeUso}} %</li>
+            {% endif %}
+             {% set i = i+1 %}
         {% endfor %}
         </ul>
         {% if is_granted('ROLE_ADMIN') and format != null %}
-            <button>Editar</button>
+           <a class="btn btn-primary anadir" href="{{ path('anadir_spread', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
 </div>

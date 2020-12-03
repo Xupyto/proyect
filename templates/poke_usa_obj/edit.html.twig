@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Pokemon - Objeto{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar Pokemon - Objeto</h1>
+
+    {{ include('poke_usa_obj/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a class="btn btn-primary" href="{{ path('poke_usa_obj_index') }}">Volver al listado</a>
+
+    
+{% endblock %}

@@ -34,6 +34,19 @@ class Pokemon_usaobjRepository extends ServiceEntityRepository
         ;
     }
     
+    public function findByManyFields($format, $poke, $obj)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.formato = :val1')
+            ->andWhere('p.pokemonIdpoke = :val2')
+            ->andWhere('p.objetoIdobjeto = :val3')
+            ->setParameter('val1', $format)
+            ->setParameter('val2', $poke)
+            ->setParameter('val3', $obj)
+            ->getQuery()
+            ->getResult()
+            ;    
+    }
     
 
     /*

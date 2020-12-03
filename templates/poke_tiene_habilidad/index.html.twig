@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de habilidades por pokemon{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Listado de habilidades por pokemon</h1>
+
+    <table class="table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Habilidad</th>
+                <th>Formato</th>
+                <th>Porcentaje uso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poke_tiene_habilidad in poke_tiene_habilidads %}
+            <tr>
+                <td>{{ poke_tiene_habilidad.pokemonIdpoke.nombre }}</td>
+                <td>{{ poke_tiene_habilidad.habilidad.nombre }}</td>
+                <td>{{ poke_tiene_habilidad.formato.nombre }}</td>
+                <td>{{ poke_tiene_habilidad.porcentajeUso }}</td>
+                <td>
+                    
+                    <a class="btn btn-primary" href="{{ path('poke_tiene_habilidad_edit', 
+                    {'formato': poke_tiene_habilidad.formato.id, 'poke': poke_tiene_habilidad.pokemonIdpoke.idpoke,
+'hab': poke_tiene_habilidad.habilidad.idhabilidad}) }}">Editar</a>
+                    {{ include('poke_tiene_habilidad/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+    {{ knp_pagination_render(poke_tiene_habilidads) }}
+</div>
+
+    <a class="btn btn-primary crear" href="{{ path('poke_tiene_habilidad_new') }}">Crear nuevo</a>
+{% endblock %}

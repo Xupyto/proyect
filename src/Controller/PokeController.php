@@ -10,13 +10,15 @@ use App\Entity\PokemonTieneSpread;
 use App\Entity\PokePuedeAprenderMov;
 use App\Entity\PokeTieneHabilidad;
 use App\Entity\PokeUsaObj;
+use App\Form\PokemonTienePartnerType;
 use App\Form\PokeType;
 use App\Form\PokePuedeAprenderMovType;
-use App\Repository\PokemonRepository;
+use App\Form\PokeUsaObjType;
+use App\Form\PokeTieneHabilidadType;
+use App\Form\PokemonTieneSpreadType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -223,9 +225,9 @@ class PokeController extends AbstractController
     }
 
     /**
-     * @Route("/{idpoke}/edit/{format}", name="anadir_mov", methods={"GET","POST"})
+     * @Route("/editmov/{idpoke}/{format}", name="anadir_mov", methods={"GET","POST"})
      */
-    public function anadirmov(Request $request, Pokemon $poke, Formato $format): Response
+    public function anadirMov(Request $request, Pokemon $poke, Formato $format): Response
     {
        
         $pokePuedeAprenderMov = new PokePuedeAprenderMov();
@@ -239,7 +241,7 @@ class PokeController extends AbstractController
             $pokePuedeAprenderMov->setPokemonIdpoke($poke);
             $pokePuedeAprenderMov->setFormato($format);
             $entityManager = $this->getDoctrine()->getManager();
-            var_dump($pokePuedeAprenderMov);
+            
             $entityManager->persist($pokePuedeAprenderMov);
             $entityManager->flush();
 
@@ -248,11 +250,151 @@ class PokeController extends AbstractController
                 'format' => $format->getId()
             ]);
         }
-        $blocked = true;
+        
         return $this->render('poke_puede_aprender_mov/new.html.twig', [
             'poke_puede_aprender_mov' => $pokePuedeAprenderMov,
             'form' => $form->createView(),
-            'blocked' => $blocked
+            'blocked' => true
+        ]);
+    }
+
+    /**
+     * @Route("/editobj/{idpoke}/{format}", name="anadir_obj", methods={"GET","POST"})
+     */
+    public function anadirObj(Request $request, Pokemon $poke, Formato $format): Response
+    {
+       
+        $pokeusaobj = new PokeUsaObj();
+        $pokeusaobj->setPokemonIdpoke($poke);
+        $pokeusaobj->setFormato($format);
+        
+        $form = $this->createForm(PokeUsaObjType::class, $pokeusaobj);
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $pokeusaobj->setPokemonIdpoke($poke);
+            $pokeusaobj->setFormato($format);
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $entityManager->persist($pokeusaobj);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('poke_show', [
+                'idpoke' => $poke->getIdpoke(),
+                'format' => $format->getId()
+            ]);
+        }
+        
+        return $this->render('poke_usa_obj/new.html.twig', [
+            'poke_usa_obj' => $pokeusaobj,
+            'form' => $form->createView(),
+            'blocked' => true
+        ]);
+    }
+
+    /**
+     * @Route("/edithab/{idpoke}/{format}", name="anadir_hab", methods={"GET","POST"})
+     */
+    public function anadirHab(Request $request, Pokemon $poke, Formato $format): Response
+    {
+       
+        $poketienehab = new PokeTieneHabilidad();
+        $poketienehab->setPokemonIdpoke($poke);
+        $poketienehab->setFormato($format);
+        
+        $form = $this->createForm(PokeTieneHabilidadType::class, $poketienehab);
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $poketienehab->setPokemonIdpoke($poke);
+            $poketienehab->setFormato($format);
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $entityManager->persist($poketienehab);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('poke_show', [
+                'idpoke' => $poke->getIdpoke(),
+                'format' => $format->getId()
+            ]);
+        }
+        
+        return $this->render('poke_tiene_habilidad/new.html.twig', [
+            'poke_tiene_habilidad' => $poketienehab,
+            'form' => $form->createView(),
+            'blocked' => true
+        ]);
+    }
+
+    /**
+     * @Route("/editspre/{idpoke}/{format}", name="anadir_spread", methods={"GET","POST"})
+     */
+    public function anadirSpread(Request $request, Pokemon $poke, Formato $format): Response
+    {
+       
+        $poketienespread = new PokemonTieneSpread();
+        $poketienespread->setPokemonIdpoke($poke);
+        $poketienespread->setFormato($format);
+        
+        $form = $this->createForm(PokemonTieneSpreadType::class, $poketienespread);
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $poketienespread->setPokemonIdpoke($poke);
+            $poketienespread->setFormato($format);
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $entityManager->persist($poketienespread);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('poke_show', [
+                'idpoke' => $poke->getIdpoke(),
+                'format' => $format->getId()
+            ]);
+        }
+        
+        return $this->render('pokemon_tiene_spread/new.html.twig', [
+            'pokemon_tiene_spread' => $poketienespread,
+            'form' => $form->createView(),
+            'blocked' => true
+        ]);
+    }
+
+    /**
+     * @Route("/editpart/{idpoke}/{format}", name="anadir_partner", methods={"GET","POST"})
+     */
+    public function anadirPartner(Request $request, Pokemon $poke, Formato $format): Response
+    {
+       
+        $poketienepartner = new PokemonTienePartner();
+        $poketienepartner->setPokemonIdpoke($poke);
+        $poketienepartner->setFormato($format);
+        
+        $form = $this->createForm(PokemonTienePartnerType::class, $poketienepartner);
+        $form->handleRequest($request);
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $poketienepartner->setPokemonIdpoke($poke);
+            $poketienepartner->setFormato($format);
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $entityManager->persist($poketienepartner);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('poke_show', [
+                'idpoke' => $poke->getIdpoke(),
+                'format' => $format->getId()
+            ]);
+        }
+        
+        return $this->render('pokemon_tiene_partner/new.html.twig', [
+            'pokemon_tiene_partner' => $poketienepartner,
+            'form' => $form->createView(),
+            'blocked' => true
         ]);
     }
 

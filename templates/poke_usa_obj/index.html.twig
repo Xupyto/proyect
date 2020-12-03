@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de objetos usados por pokemon{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Listado de objetos usados por pokemon</h1>
+
+    <table class="table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Objeto</th>
+                <th>Formato</th>
+                <th>Porcentaje uso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poke_usa_obj in poke_usa_objs %}
+            <tr>
+                <td>{{ poke_usa_obj.pokemonIdpoke.nombre }}</td>
+                <td>{{ poke_usa_obj.objetoIdobjeto.nombre }}</td>
+                <td>{{ poke_usa_obj.formato.nombre }}</td>
+                <td>{{ poke_usa_obj.porcentajeUso }} %</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('poke_usa_obj_edit', {'formato': poke_usa_obj.formato.id, 'poke': poke_usa_obj.pokemonIdpoke.idpoke,
+'obj': poke_usa_obj.objetoIdobjeto.idobjeto}) }}">Editar</a>
+                    {{ include('poke_usa_obj/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(poke_usa_objs) }}
+</div>
+
+    <a class="btn btn-primary crear" href="{{ path('poke_usa_obj_new') }}">Crear nuevo</a>
+{% endblock %}

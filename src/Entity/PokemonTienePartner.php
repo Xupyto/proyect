@@ -3,18 +3,27 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * PokemonTienePartner
  *
  * @ORM\Table(name="pokemon_tiene_partner", indexes={@ORM\Index(name="fk_Pokemon_has_Pokemon_Pokemon1_idx", columns={"Pokemon_Idpoke"}), @ORM\Index(name="fk_Pokemon_tiene_partner_Formato1_idx", columns={"Formato_Id"}), @ORM\Index(name="fk_Pokemon_has_Pokemon_Pokemon2_idx", columns={"Pokemon_Idpoke1"})})
  * @ORM\Entity(repositoryClass="App\Repository\PokemonTienePartnerRepository")
+ * @UniqueEntity(fields={"formato","pokemonIdpoke","pokemonIdpoke1"}, message="Ya existe ese registro.")
  */
 class PokemonTienePartner
 {
     /**
      * @var float
-     *
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @Assert\Range(
+     *      min = 0.001,
+     *      max = 100,
+     *      minMessage = "Debes ser al menos {{ limit }} para ser válido.",
+     *      maxMessage = "No puedes introducir un valor mayo a {{ limit }}. "
+     * )
      * @ORM\Column(name="Porcentaje_uso", type="float", precision=10, scale=0, nullable=false)
      */
     private $porcentajeUso;
@@ -28,6 +37,7 @@ class PokemonTienePartner
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Pokemon_Idpoke", referencedColumnName="Idpoke")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $pokemonIdpoke;
 
@@ -40,6 +50,7 @@ class PokemonTienePartner
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Pokemon_Idpoke1", referencedColumnName="Idpoke")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $pokemonIdpoke1;
 
@@ -52,6 +63,7 @@ class PokemonTienePartner
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Formato_Id", referencedColumnName="Id")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $formato;
 

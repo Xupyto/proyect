@@ -34,7 +34,19 @@ class PokemonTienePartnerRepository extends ServiceEntityRepository
         ;
     }
     
-    
+    public function findByManyFields($format, $poke, $poke1)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.formato = :val1')
+            ->andWhere('p.pokemonIdpoke = :val2')
+            ->andWhere('p.pokemonIdpoke1 = :val3')
+            ->setParameter('val1', $format)
+            ->setParameter('val2', $poke)
+            ->setParameter('val3', $poke1)
+            ->getQuery()
+            ->getResult()
+            ;    
+    }
 
     /*
     public function findOneBySomeField($value): ?Pokemon

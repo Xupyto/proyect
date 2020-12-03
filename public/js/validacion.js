@@ -32,6 +32,39 @@ $(document).ready(function() {
             }
         }
     })
+    
+    $("#pokeobjformatform").validate({
+        rules: {
+            'poke_usa_obj[porcentajeUso]' : {
+                required: true,
+                range: [0.001,100]
+            },
+            'poke_usa_obj[formato]' : {
+                required: true,
+            },
+            'poke_usa_obj[pokemonIdpoke]' : {
+                required: true,
+            },
+            'poke_usa_obj[objetoIdobjeto]' : {
+                required: true,
+            }
+
+        },messages : {
+            'poke_usa_obj[porcentajeUso]' : {
+                required: "No puede dejar este campo vacío.",
+                range: "Debe ser un valor entre 0,001 y 100."
+            },
+            'poke_usa_obj[formato]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'poke_usa_obj[pokemonIdpoke]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'poke_usa_obj[objetoIdobjeto]' : {
+                required: "No puedes dejar este campo vacío.",
+            }
+        }
+    })
 
     $("#pokeformatform").validate({
         rules: {

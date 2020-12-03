@@ -34,7 +34,19 @@ class PokeTieneHabilidadRepository extends ServiceEntityRepository
         ;
     }
     
-    
+    public function findByManyFields($format, $poke, $hab)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.formato = :val1')
+            ->andWhere('p.pokemonIdpoke = :val2')
+            ->andWhere('p.habilidad = :val3')
+            ->setParameter('val1', $format)
+            ->setParameter('val2', $poke)
+            ->setParameter('val3', $hab)
+            ->getQuery()
+            ->getResult()
+            ;    
+    }
 
     /*
     public function findOneBySomeField($value): ?Pokemon

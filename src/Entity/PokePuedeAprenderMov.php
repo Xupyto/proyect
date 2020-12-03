@@ -37,7 +37,7 @@ class PokePuedeAprenderMov
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Formato_Id", referencedColumnName="Id")
      * })
-     * @Assert\IsTrue()
+     *@Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $formato;
 
@@ -63,7 +63,7 @@ class PokePuedeAprenderMov
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Pokemon_Idpoke", referencedColumnName="Idpoke")
      * })
-     * @Assert\IsTrue()
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $pokemonIdpoke;
 

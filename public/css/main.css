@@ -66,4 +66,12 @@ a.crear {
     margin-left: 45%;
 }
 
+.anadir {
+    margin: 5pt 0pt 5pt 10pt;
+}
+
+.ocultate {
+    display: none;
+}
+
 

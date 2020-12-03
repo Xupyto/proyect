@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Pokemon - Spread{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Nuevo Pokemon - Spread</h1>
+
+    {{ include('pokemon_tiene_spread/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('pokemon_tiene_spread_index') }}">Volver al listado</a>
+{% endblock %}

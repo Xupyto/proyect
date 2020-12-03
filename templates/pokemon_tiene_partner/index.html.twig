@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de spread usados en pokemon{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">PokemonTienePartner index</h1>
+
+    <table class="table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Partner</th>
+                <th>Formato</th>
+                <th>Porcentaje uso</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pokemon_tiene_partner in pokemon_tiene_partners %}
+            <tr>
+                <td>{{ pokemon_tiene_partner.pokemonIdpoke.nombre }}</td>
+                <td>{{ pokemon_tiene_partner.pokemonIdpoke1.nombre }}</td>
+                <td>{{ pokemon_tiene_partner.formato.nombre }}</td>
+                <td>{{ pokemon_tiene_partner.porcentajeUso }} %</td>
+                <td>
+                    
+                    <a class="btn btn-primary" href="{{ path('pokemon_tiene_partner_edit', {'formato': pokemon_tiene_partner.formato.id, 'poke': pokemon_tiene_partner.pokemonIdpoke.idpoke
+                    ,  'poke1': pokemon_tiene_partner.pokemonIdpoke1.idpoke}) }}">Editar</a>
+                    {{ include('pokemon_tiene_partner/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pokemon_tiene_partners) }}
+</div>
+    <a class="btn btn-primary crear" href="{{ path('pokemon_tiene_partner_new') }}">Crear nuevo</a>
+{% endblock %}

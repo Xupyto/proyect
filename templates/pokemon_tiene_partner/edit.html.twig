@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Pokemon - Partner{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar Pokemon - Partner</h1>
+
+    {{ include('pokemon_tiene_partner/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a class="btn btn-primary" href="{{ path('pokemon_tiene_partner_index') }}">Volver al listado</a>
+
+    
+{% endblock %}
