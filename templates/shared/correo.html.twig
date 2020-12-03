@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Pikalytics</title>
+        <style type="text/css">
+  body {
+    color: black;
+    background-color: #d8da3d }
+
+  </style>
+
+
+    </head>
+    <body>
+<h1>{{articulo.titulo}}</h1>
+<h3> {{ "now"|date('d/m/Y - H:i', timezone="Europe/Paris") }}</h3>
+
+<img class="show" src="{{ asset('imagenes//noticias//'~ articulo.foto) }}" alt="{{articulo.foto}}">
+
+<p>{{articulo.contenido}}</p>
+
+<p>Si hay algún tipo de error en su pedido contáctenos a <b>angelesmu1992@gmail.com</b></p>
+
+
+</body>
+</html>

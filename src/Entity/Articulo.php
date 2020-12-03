@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Articulo
  *
  * @ORM\Table(name="articulo")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ArticuloRepository")
+ * @UniqueEntity(fields={"titulo"}, message="Ya hay una noticia que se llama así.")
  */
 class Articulo
 {
@@ -23,14 +26,21 @@ class Articulo
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @Assert\Length(min=2,max=40,minMessage="Longitud mínima 2 caracteres",maxMessage="Longitud máxima 40 carácteres")
+     * @Assert\Regex(
+     *      pattern="/^[ÁÉÍÓÚA-Z]+/",
+     *      message="El valor no puede ser un valor numérico/no emmpieza por mayúscula."
+     * )
      * @ORM\Column(name="Titulo", type="string", length=60, nullable=false)
      */
     private $titulo;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @Assert\Length(min=10,max=65535,minMessage="Longitud mínima 10 caracteres",maxMessage="Longitud máxima 65535 carácteres")
+     * 
      * @ORM\Column(name="Contenido", type="text", length=65535, nullable=false)
      */
     private $contenido;
@@ -81,6 +91,11 @@ class Articulo
         $this->foto = $foto;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->titulo;
     }
 
 

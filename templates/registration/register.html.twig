@@ -7,22 +7,28 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+   
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password, {
-            label: 'Contraseña'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    {{ form_start(registrationForm,{attr:{'class' : 'form-signin', 'id':'registrationform'}}) }}
+     
+    <h1 class="h3 mb-3 font-weight-normal">Formulario de registro</h1>
+        
+        {{ form_widget(registrationForm.email, {attr:{'placeholder' : 'Email', 'class':'form-control'}}) }}
+        {{ form_widget(registrationForm.password, {attr:{'placeholder' : 'Contraseña', 'class':'form-control'}}) }}
+  
+        
+       
+        {{ form_widget(registrationForm.agreeTerms) }}
+        {{ form_label(registrationForm.agreeTerms,'Aceptar los términos') }}<br>
 
-        <button type="submit" class="btn">Registrar</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
     {{ form_end(registrationForm) }}
+    
 {% endblock %}
-
+ {% block javascripts %}
 <script>
 $(document).ready(function(){
-    $("#correo_password").attr("type", "password");
+    $("#registration_form_password").attr("type", "password");
 })
 
 function mostrar() {
@@ -34,3 +40,4 @@ function mostrar() {
   }
 }
 </script>
+{% endblock %}

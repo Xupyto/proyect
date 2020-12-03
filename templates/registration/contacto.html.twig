@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario de contacto{% endblock %}
+
+{% block body %}
+    <h1 class="centrar">Formulario de contacto</h1>
+    
+<p class="centrar">Registrate para estar al tanto de nuestros nuevos productos antes que nadie!</p>
+
+    {{ include('registration/_form.html.twig') }}
+  {% endblock %}

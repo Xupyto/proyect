@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     directorio_imagenes: '%kernel.project_dir%/public/imagenes'
+    imagenes_noticias: '%kernel.project_dir%/public/imagenes/noticias'
     locale: 'es'
 
 services:

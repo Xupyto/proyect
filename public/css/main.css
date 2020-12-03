@@ -74,4 +74,25 @@ a.crear {
     display: none;
 }
 
+div img.show {
+    width: 30%;
+    margin-top: 20px;
+}
+
+.container {
+    width: 90%;
+    background-color: antiquewhite;
+    padding: 1.5em;
+    border: 1px solid black;
+    border-radius: 20px 20px;
+    margin: 0 auto;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 

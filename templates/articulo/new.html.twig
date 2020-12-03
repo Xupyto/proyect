@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo artículo{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Nuevo artículo</h1>
+
+    {{ include('articulo/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('articulo_index') }}">Volver al listado</a>
+{% endblock %}

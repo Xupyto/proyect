@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pokemon;
 use App\Entity\Formato;
+use App\Entity\Articulo;
 use App\Entity\PokemonEstaEnFormato;
 use App\Entity\PokemonTienePartner;
 use App\Entity\PokemonTieneSpread;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Snappy\Pdf;
 
 
 class PokeController extends AbstractController
@@ -431,6 +433,91 @@ class PokeController extends AbstractController
             'format' => $format
         ]);
         
+    }
+
+    /**
+     * @Route("/articulos", name="articulos_index", methods={"GET"}) 
+     *  
+     */
+    public function listadoArticulos(PaginatorInterface $paginator, Request $request): Response
+    {
+        $articulos = $this->getDoctrine()
+            ->getRepository(Articulo::class)
+            ->findAll();
+
+            $pagination = $paginator->paginate(
+                $articulos,
+                $request->query->getInt("page", 1),
+                6
+            );
+
+        return $this->render('shared/listadoarticulos.html.twig', [
+            'articulos' => $pagination,
+        ]);
+    }
+    /**
+     * @Route("/contacto/{art}", name="contacto")
+     *
+     * @return void
+     */
+    public function contacto(\Swift_Mailer $mailer, Request $request, Articulo $art){
+
+       
+        $email = $request->get("correo");
+
+        $message = (new \Swift_Message('Articulo'))
+            ->setFrom('angelesmu1992@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView(
+                    // templates/emails/registration.html.twig
+                    'shared/correo.html.twig',
+                    [
+                        'articulo' => $art,
+                    ]
+                ),
+                'text/html'
+            );
+
+        $mailer->send($message);   
+        
+        // creación del pdf
+        $html = $this->renderView(
+            'shared/correo.html.twig',
+            [
+                'articulo' => $art,
+            ]
+        );
+
+
+        return $this->crea_pdf($html);
+    }
+
+    /**
+     * Método que genera un pdf pasandole una plantilla html
+     * @Route("/pdf", name="pdf")
+     * @param [type] $html
+     * @return void
+     */
+    private function crea_pdf($html)
+    {
+        $filename = sprintf('noticia-%s.pdf', date('Y-m-d_h-i'));
+        // Programa encargado de la conversión de html a pdf
+        $pdf = new Pdf("\"D:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"");
+        return new Response(
+            $pdf->getOutputFromHtml($html, array(
+                'default-header' => null,
+                'encoding' => 'utf-8',
+                'images' => true,
+                'margin-right'  => 7,
+                'margin-left'  => 7,
+            )),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+            ]
+        );
     }
 
 }

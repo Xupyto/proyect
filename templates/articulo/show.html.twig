@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artículo {{ articulo.idarticulo }}{% endblock %}
+
+{% block body %}
+   
+
+    <img class="show" src="{{ asset('imagenes//noticias//'~ articulo.foto) }}" alt="{{articulo.foto}}">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id artículo</th>
+                <td>{{ articulo.idarticulo }}</td>
+            </tr>
+            <tr>
+                <th>Título</th>
+                <td>{{ articulo.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Contenido</th>
+                <td>{{ articulo.contenido }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('articulo_index') }}">Volver al listado</a>
+
+    <a class="btn btn-primary" href="{{ path('articulo_edit', {'idarticulo': articulo.idarticulo}) }}">Editar</a>
+
+    {{ include('articulo/_delete_form.html.twig') }}
+{% endblock %}

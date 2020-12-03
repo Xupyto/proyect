@@ -13,9 +13,11 @@
         <a class="nav-link" href="">Team builder</a>
       </li>
       </li>
+       
         <li class="nav-item">
-        <a class="nav-link" href="">Artículos</a>
+        <a class="nav-link" href="{{path('articulos_index')}}">Artículos</a>
       </li>
+      
       {% if is_granted('ROLE_ADMIN') %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,6 +29,7 @@
           <a class="dropdown-item" href="{{path('objeto_index')}}">Objeto</a>
           <a class="dropdown-item" href="{{path('habilidad_index')}}">Habilidad</a>
           <a class="dropdown-item" href="{{path('spread_index')}}">Spread</a>
+          <a class="dropdown-item" href="{{path('articulo_index')}}">Artículos</a>
         </div>
       </li>
       <li class="nav-item dropdown">
