@@ -1,4 +1,6 @@
 {{ form_start(form, {attr:{'class' : 'mantenimiento', 'id':'pokeformatform'}}) }}
+    {{ form_label(form.pokemonIdpoke, 'Pokémon')}}
+    {{ form_widget(form.pokemonIdpoke)}}
     {{ form_widget(form) }}
     <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

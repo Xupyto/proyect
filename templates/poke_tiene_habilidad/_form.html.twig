@@ -4,7 +4,9 @@
     {{ form_row(form.pokemonIdpoke) }}
     {{ form_row(form.formato) }}
 </div>
-
+{% else %}
+{{ form_label(form.pokemonIdpoke, 'Pokémon')}}
+    {{ form_widget(form.pokemonIdpoke)}}
 {% endif %}
     {{ form_widget(form) }}
     {{form_errors(form.formato)}}

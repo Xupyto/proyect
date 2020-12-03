@@ -4,9 +4,14 @@
     {{ form_row(form.pokemonIdpoke) }}
     {{ form_row(form.formato) }}
 </div>
-
+{% else %}
+{{ form_label(form.pokemonIdpoke, 'Pokémon')}}
+    {{ form_widget(form.pokemonIdpoke)}}
 {% endif %}
-    
+     <br>
+   
+{{ form_label(form.pokemonIdpoke1, 'Partner')}}
+    {{ form_widget(form.pokemonIdpoke1)}} 
     {{ form_widget(form) }}
     {{form_errors(form.formato)}}
    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
