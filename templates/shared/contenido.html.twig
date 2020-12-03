@@ -114,7 +114,12 @@
              {% if i < 5 %}
             <li class="list-group-item">
             <img width="50" heigh="25" class="show" src="{{ asset('imagenes//'~ comp.pokemonIdpoke1.nombre|replace({' ': ''})) }}" alt="{{comp.pokemonIdpoke1.nombre}}">
-           {{comp.pokemonIdpoke1.nombre}} - {{comp.porcentajeUso}} %</li>
+                {% if format != null %}
+            <a class="action" href="{{ path('poke_show', {'idpoke': comp.pokemonIdpoke1.idpoke, 'format': format.id }) }}">{{comp.pokemonIdpoke1.nombre}}</a>
+            {% else %}
+            {{comp.pokemonIdpoke1.nombre}}
+            {% endif %} - {{comp.porcentajeUso}} %</li>
+                
             {% endif %}
              {% set i = i+1 %}
         {% endfor %}
