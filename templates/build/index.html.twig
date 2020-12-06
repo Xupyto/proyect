@@ -17,9 +17,8 @@
         {% for equipo in equipos %}
             <tr>
                 
-                <td>{{ equipo.nombre }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('equipo_show', {'idequipo': equipo.idequipo}) }}">Mostrar</a>
+                <td><a href="{{ path('build_pokes', {'idequipo': equipo.idequipo}) }}">{{ equipo.nombre }}</a></td>
+                <td>             
                     <a class="btn btn-primary" href="{{ path('build_edit', {'idequipo': equipo.idequipo}) }}">Editar</a>
                     {{ include('build/_delete_form.html.twig') }}
                 </td>

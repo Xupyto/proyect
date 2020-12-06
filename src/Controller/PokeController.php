@@ -48,11 +48,13 @@ class PokeController extends AbstractController
                 'pokes' => $pagination,
             ]);
     }
+
+    
     /**
      * 
      * @Route("/filtroformato", name="filtrar_formato", methods={"GET","POST"})
      */
-    public function index_filtro(PaginatorInterface $paginator, Request $request)
+    public function index_filtroF(PaginatorInterface $paginator, Request $request)
     {
         $session = $request->getSession();
         $filtro = $request->get("format");
@@ -100,6 +102,11 @@ class PokeController extends AbstractController
         $formatos = $em->getRepository(Formato::class)->findAll();
 
         return $this->render('shared/filtroformato.html.twig', ["formatos" => $formatos]);
+    }
+
+    public function filtro_nombre()
+    {
+        return $this->render('shared/filtronombre.html.twig');
     }
     
 

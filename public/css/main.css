@@ -95,4 +95,31 @@ div img.show {
     margin-left: -15px;
 }
 
+ .pokedex_entry {
+    display: inline-block;
+    line-height: 40px;
+    vertical-align: top;
+    background: #f2f2f2;
+    padding-right: 30px;
+    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    margin-right: 10px;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+#team {
+    width: 100%;
+}
+
+.team-flex-wrapper {
+    width:60%;
+    height:500px;
+    justify-content: center;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 

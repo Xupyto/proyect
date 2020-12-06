@@ -3,19 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * EquipoContienePokemon
  *
  * @ORM\Table(name="equipo_tiene_pokemon", indexes={@ORM\Index(name="fk_Usuario_has_Pokemon_Equipo1_idx", columns={"Equipo_idequipo", "Equipo_Usuario_email"}), @ORM\Index(name="fk_Usuario_has_Pokemon_Pokemon1_idx", columns={"Pokemon_Idpoke"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EquipoContienePokeRepository")
  */
 class EquipoContienePokemon
 {
     /**
-     * @var int
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Pokemon", inversedBy="pokeestaenequipos")
@@ -25,7 +22,6 @@ class EquipoContienePokemon
     private $pokemonIdpoke;
 
     /**
-     * @var int
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Equipo", inversedBy="pokemonIdpoke")
@@ -86,14 +82,26 @@ class EquipoContienePokemon
      */
     private $spread;
 
-    public function getPokemonIdpoke(): ?int
+    public function getPokemonIdpoke(): ?Pokemon
     {
         return $this->pokemonIdpoke;
     }
 
-    public function getEquipoIdequipo(): ?int
+    public function setPokemonIdpoke(Pokemon $poke): self
+    {
+        $this->pokemonIdpoke = $poke;
+        return $this;
+    }
+
+    public function getEquipoIdequipo(): ?Equipo
     {
         return $this->equipoIdequipo;
+    }
+
+    public function setEquipoIdequipo(Equipo $eq): self
+    {
+        $this->equipoIdequipo = $eq;
+        return $this;
     }
 
     public function getEquipoUsuarioEmail(): ?string

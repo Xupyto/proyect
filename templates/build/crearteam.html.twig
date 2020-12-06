@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="filtroformato">
+<form action="{{path('build_pokes', {'idequipo': equipo.idequipo})}}" method="POST">
+    <div>
+        <input name="nombre" type="text"/>
+    </div>
+     <input type="submit" value="Filtrar" class="btn btn-primary" />
+</form>
+
+</div>
+<div id="listapokes">
+    <h1 class="titulo">Lista de Pokemon</h1>
+    <ul class="list ss">
+    
+        {% for poke in pokes %}
+            <div class="pokedex_entry">
+               <img width="50" heigh="50" src="{{ asset('imagenes//'~ poke.foto) }}" alt="{{poke.nombre}}"> {{ poke.nombre }} 
+               <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.tipoNombre[0].nombre ) }}" alt="{{poke.tipoNombre[0].nombre}}">
+                {% if poke.tipoNombre[1] is defined %}
+                    <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.tipoNombre[1].nombre ) }}" alt="{{poke.tipoNombre[1].nombre}}">
+                    {% endif %}
+              
+                <button id="a{{poke.idpoke}}" class="btn btn-dark anadir">Añadir</button>
+            </div>
+        {% endfor %}
+    </ul>
+    <div class="navigation">
+          {{ knp_pagination_render(pokes) }}
+      </div>
+</div>
+
+
+<hr>
+<div id="team">
+    <ul class="list ss">
+        <div class="team-flex-wrapper">
+      
+            {% for miembro in team %}
+               <div id="team_"~{{miembro[0].nombre}} class="pokedex_entry team_builder_entry">
+                <li class="list-group-item ">
+                <p><img width="50" heigh="50" src="{{ asset('imagenes//'~ miembro[0].foto) }}" alt="{{miembro[0].nombre}}"> {{ miembro[0].nombre }} </p>
+                </br>
+                <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[0].nombre ) }}" alt="{{miembro[0].tipoNombre[0].nombre}}">
+                    {% if miembro[0].tipoNombre[1] is defined %}
+                        <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[1].nombre ) }}" alt="{{miembro[0].tipoNombre[1].nombre}}">
+                    {% endif %}
+                </li>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button id="a{{miembro[0].idpoke}}" class="btn btn-danger delete">Eliminar</button>
+                </div>
+                </div>
+                {% else %}
+                            <div>
+                                <p>No hay pokes.</p>
+                            </div>
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+
+{% if team != null %}
+  <button  type="button" data-toggle="modal" data-target="#modalguardar" class="btn btn-info" >Guardar</button>
+
+<!-- Modal guardar -->
+<div class="modal fade" id="modalguardar" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close cls" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{path('guardar_build', {'idequipo': equipo.idequipo})}}" method="POST">
+        <div class="modal-body">
+          <p>Estas seguro de guardar este equipo?</p>         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary cls" data-dismiss="modal">Cerrar</button>
+          <input id="confirmar" type="submit" class="btn btn-info" value="Confirmar guardado"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+ {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+ <script>
+
+  $(document).ready(function(){
+      var div = $("<div class='loader'>");
+    $(".anadir").click(function(){
+          
+          $("body").append(div);
+          var id = $(this).attr("id");
+          id = id.replace("a", "");
+          
+          $.ajax({
+            url: "{{ path('add_team') }}",
+            "type": "POST",
+                "dataType": 'json',
+                "contentType": 'application/json',
+                "data": JSON.stringify(id)
+            })
+            .done(function(data){
+             
+              div.remove();
+              console.log("Todo ha ido bien: "+data);
+              location.reload();
+            })
+            .fail(function(data){
+              console.log("Error "+data);
+              location.reload();
+            })
+          
+    })
+  
+
+  $(".delete").click(function(){
+          $("body").append(div);
+          var id = $(this).attr("id");
+          id = id.replace("a", "");
+          
+          $.ajax({
+            url: "{{ path('eliminar_poke') }}",
+            "type": "POST",
+                "dataType": 'json',
+                "contentType": 'application/json',
+                "data": JSON.stringify(id)
+            })
+            .done(function(data){
+               div.remove();
+               console.log("Todo ha ido bien: "+data);
+               location.reload();
+            })
+            .fail(function(data){              
+              location.reload();
+            })
+          
+    })
+
+    $(".cls").click(function(ev){
+      location.reload();
+    })
+})
+  </script>
+ 
+{% endblock %}

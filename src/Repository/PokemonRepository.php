@@ -34,7 +34,16 @@ class PokemonRepository extends ServiceEntityRepository
         ;
     }
     
-    
+    public function findByName($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nombre like :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.idpoke', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Pokemon
