@@ -10,6 +10,12 @@
     color: black;
     background-color: #d8da3d }
 
+  img {
+    width: 30%;
+    margin-top: 20px;
+}
+  
+
   </style>
 
 
@@ -18,7 +24,8 @@
 <h1>{{articulo.titulo}}</h1>
 <h3> {{ "now"|date('d/m/Y - H:i', timezone="Europe/Paris") }}</h3>
 
-<img class="show" src="{{ asset('imagenes//noticias//'~ articulo.foto) }}" alt="{{articulo.foto}}">
+
+    <img   src="{{ absolute_url(asset('imagenes/noticias/' ~ articulo.foto )) }}">
 
 <p>{{articulo.contenido}}</p>
 

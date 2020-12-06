@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * EquipoContienePokemon
  *
- * @ORM\Table(name="equipo_contiene_pokemon", indexes={@ORM\Index(name="fk_Usuario_has_Pokemon_Equipo1_idx", columns={"Equipo_idequipo", "Equipo_Usuario_email"}), @ORM\Index(name="fk_Usuario_has_Pokemon_Pokemon1_idx", columns={"Pokemon_Idpoke"})})
+ * @ORM\Table(name="equipo_tiene_pokemon", indexes={@ORM\Index(name="fk_Usuario_has_Pokemon_Equipo1_idx", columns={"Equipo_idequipo", "Equipo_Usuario_email"}), @ORM\Index(name="fk_Usuario_has_Pokemon_Pokemon1_idx", columns={"Pokemon_Idpoke"})})
  * @ORM\Entity
  */
 class EquipoContienePokemon
@@ -15,30 +17,24 @@ class EquipoContienePokemon
     /**
      * @var int
      *
-     * @ORM\Column(name="Pokemon_Idpoke", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Pokemon", inversedBy="pokeestaenequipos")
+     * @ORM\JoinColumn(name="Pokemon_Idpoke", referencedColumnName="Idpoke",
+     * columnDefinition="bigint COMMENT 'Un pokemon puede tener muchos equipos'", nullable=false, onDelete="CASCADE")
      */
     private $pokemonIdpoke;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="Equipo_idequipo", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Equipo", inversedBy="pokemonIdpoke")
+     * @ORM\JoinColumn(name="equipo_idequipo", referencedColumnName="idequipo",
+     * columnDefinition="bigint COMMENT 'Un equipo tiene 6 pokemon máximo'", nullable=false, onDelete="CASCADE")
      */
     private $equipoIdequipo;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Equipo_Usuario_email", type="string", length=50, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    private $equipoUsuarioEmail;
-
+   
     /**
      * @var string|null
      *
@@ -81,12 +77,7 @@ class EquipoContienePokemon
      */
     private $habilidad;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="Naturaleza", type="string", length=45, nullable=true)
-     */
-    private $naturaleza;
+  
 
     /**
      * @var string|null
@@ -182,17 +173,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getNaturaleza(): ?string
-    {
-        return $this->naturaleza;
-    }
-
-    public function setNaturaleza(?string $naturaleza): self
-    {
-        $this->naturaleza = $naturaleza;
-
-        return $this;
-    }
+   
 
     public function getSpread(): ?string
     {
@@ -204,6 +185,12 @@ class EquipoContienePokemon
         $this->spread = $spread;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+            return $this->getPokemonIdpoke() . $this->getEquipoIdequipo();
+        
     }
 
 

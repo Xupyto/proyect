@@ -54,12 +54,6 @@ class EquipoJugadorCampeonato
      */
     private $habilidad;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Naturaleza", type="string", length=45, nullable=false)
-     */
-    private $naturaleza;
 
     /**
      * @var \Campeonato
@@ -169,17 +163,7 @@ class EquipoJugadorCampeonato
         return $this;
     }
 
-    public function getNaturaleza(): ?string
-    {
-        return $this->naturaleza;
-    }
-
-    public function setNaturaleza(string $naturaleza): self
-    {
-        $this->naturaleza = $naturaleza;
-
-        return $this;
-    }
+   
 
     public function getCampeonatoNombre(): ?Campeonato
     {

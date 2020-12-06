@@ -464,7 +464,7 @@ class PokeController extends AbstractController
 
        
         $email = $request->get("correo");
-
+        
         $message = (new \Swift_Message('Articulo'))
             ->setFrom('angelesmu1992@gmail.com')
             ->setTo($email)
@@ -478,6 +478,7 @@ class PokeController extends AbstractController
                 ),
                 'text/html'
             );
+            var_dump($email);          
 
         $mailer->send($message);   
         
@@ -519,5 +520,7 @@ class PokeController extends AbstractController
             ]
         );
     }
+
+    
 
 }

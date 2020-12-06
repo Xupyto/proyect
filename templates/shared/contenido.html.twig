@@ -5,10 +5,10 @@
 {% block body %}
 <h1 class="titulo">{{ pokemon.nombre }}</h1>
 <div>
-    <img width="100" heigh="100" class="show" src="{{ asset('imagenes//'~ pokemon.foto) }}" alt="{{pokemon.nombre}}">
-    <img width="100" heigh="50" class="show" src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[0].nombre ) }}" alt="{{pokemon.tipoNombre[0].nombre}}">
+    <img width="100" heigh="100" src="{{ asset('imagenes//'~ pokemon.foto) }}" alt="{{pokemon.nombre}}">
+    <img width="100" heigh="50"  src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[0].nombre ) }}" alt="{{pokemon.tipoNombre[0].nombre}}">
    {% if pokemon.tipoNombre[1] is defined %}
-    <img width="100" heigh="50" class="show" src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[1].nombre ) }}" alt="{{pokemon.tipoNombre[1].nombre}}">
+    <img width="100" heigh="50"  src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[1].nombre ) }}" alt="{{pokemon.tipoNombre[1].nombre}}">
     {% endif %}
     
 
@@ -63,7 +63,7 @@
         {% set i = 0 %}
         {% for a in ataques %}
             {% if i < 5 %}
-            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25" class="show" src="{{ asset('imagenes/tipos//'~ a.movimiento.tipoNombre.nombre ) }}" alt="{{a.movimiento.tipoNombre.nombre}}"> - {{a.porcentajeUso}} %</li>
+            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ a.movimiento.tipoNombre.nombre ) }}" alt="{{a.movimiento.tipoNombre.nombre}}"> - {{a.porcentajeUso}} %</li>
              {% endif %} 
              {% set i = i+1 %}
         {% endfor %}
@@ -113,7 +113,7 @@
         {% for comp in companeros %}
              {% if i < 5 %}
             <li class="list-group-item">
-            <img width="50" heigh="25" class="show" src="{{ asset('imagenes//'~ comp.pokemonIdpoke1.nombre|replace({' ': ''})) }}" alt="{{comp.pokemonIdpoke1.nombre}}">
+            <img width="50" heigh="25" src="{{ asset('imagenes//'~ comp.pokemonIdpoke1.nombre|replace({' ': ''})) }}" alt="{{comp.pokemonIdpoke1.nombre}}">
                 {% if format != null %}
             <a class="action" href="{{ path('poke_show', {'idpoke': comp.pokemonIdpoke1.idpoke, 'format': format.id }) }}">{{comp.pokemonIdpoke1.nombre}}</a>
             {% else %}

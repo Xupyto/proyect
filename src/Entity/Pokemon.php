@@ -148,6 +148,14 @@ class Pokemon
     */
     private $poketieneformat;
 
+    /**
+    *  Bidirectional - uno a muchos (INVERSE SIDE) Para poner atributos extras en una relación N-M
+    *
+    * @ORM\OneToMany(targetEntity="EquipoContienePokemon", mappedBy="pokemonIdpoke", cascade={"all"})
+    *
+    */
+    private $pokeestaenequipos;
+
 
     /**
      * Constructor
@@ -156,6 +164,7 @@ class Pokemon
     {
         $this->tipoNombre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->poketieneformat = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pokeestaenequipos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getIdpoke(): ?int
@@ -294,7 +303,7 @@ class Pokemon
     }
 
     /**
-     * @return Collection|Tipo[]
+     * @return Collection|Formato[]
      */
     public function getFormats(): Collection
     {
@@ -316,6 +325,45 @@ class Pokemon
             $this->poketieneformat->removeElement($format);
         }
 
+        return $this;
+    }
+
+    public function removeFormatos(): self
+    {
+        unset($this->poketieneformat);
+        $this->poketieneformat = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this;
+    }
+    /**
+     * @return Collection|Equipo[]
+     */
+    public function getEquipos(): Collection
+    {
+        return $this->pokeestaenequipos;
+    }
+
+    public function addEquipo(Equipo $eq): self
+    {
+        if (!$this->pokeestaenequipos->contains($eq)) {
+            $this->pokeestaenequipos[] = $eq;
+        }
+
+        return $this;
+    }
+
+    public function removeEquipo(Equipo $eq): self
+    {
+        if ($this->pokeestaenequipos->contains($eq)) {
+            $this->pokeestaenequipos->removeElement($eq);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipos(): self
+    {
+        unset($this->poketieneformat);
+        $this->pokeestaenequipos = new \Doctrine\Common\Collections\ArrayCollection();
         return $this;
     }
     

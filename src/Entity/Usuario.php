@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  * @UniqueEntity(fields={"email"}, message="Ya hay una cuenta con ese email.")
  */
 class Usuario implements UserInterface
@@ -121,5 +121,9 @@ class Usuario implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function __toString()
+    {
+        return $this->email;
+    }
 
 }

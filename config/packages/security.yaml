@@ -48,3 +48,4 @@ security:
          - { path: ^/spread, roles: ROLE_ADMIN }
          - { path: ^/pokemon, roles: ROLE_ADMIN }
          - { path: ^/poke/\w+, roles: ROLE_ADMIN }
+         - { path: ^/equipo, roles: ROLE_USER }

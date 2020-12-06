@@ -90,10 +90,7 @@ class PokemonEstaEnFormato
         return $this;
     }
 
-    /**
-     * Al recuperar el objeto desde Participants, se devuelve __toString con el nombre del premio
-     *
-     */
+    
     public function __toString()
     {
             return $this->getFormato()->getNombre();

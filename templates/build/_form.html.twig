@@ -1,0 +1,7 @@
+{{ form_start(form, {attr:{'class' : 'mantenimiento', 'id':'equipoform'}}) }}
+    <div class="ocultate">
+    {{ form_row(form.usuarioEmail) }}
+</div>
+    {{form_widget(form)}}
+    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}

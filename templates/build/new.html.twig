@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear nuevo equipo{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Crear nuevo equipo</h1>
+
+    {{ include('build/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('build_index') }}">Volver al listado</a>
+{% endblock %}
