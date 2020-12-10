@@ -196,19 +196,23 @@ class EquipoController extends AbstractController
     /**
      * @Route("/builder/edicion/{idequipo}", name="build_pokes", methods={"GET","POST"})
      */
-    public function edicionBuild(PaginatorInterface $paginator, Request $request, Equipo $equipo, string $filtro=null){
+    public function edicionBuild(PaginatorInterface $paginator, Request $request, Equipo $equipo){
+        $session = $request->getSession();
         //Listar pokes para añadir al team
+        $filtro = $request->get("nombre");
+       //var_dump($this->session->get('objs'));
         if($filtro == null){
             $pokes = $this->getDoctrine()
             ->getRepository(Pokemon::class)
             ->findAll();
         } else {
-            $session = $request->getSession();
+            
             $session->set('filtro', $filtro);
 
             $pokes = $this->getDoctrine()
             ->getRepository(Pokemon::class)
             ->findByName($filtro);
+            
         }
 
             $pagination = $paginator->paginate(
@@ -216,16 +220,20 @@ class EquipoController extends AbstractController
                 $request->query->getInt("page", 1),
                 5
             );
-
+            // Comprobar que se ha cambiado de edición de equipo
+        if($session->get('idequipo') != $equipo->getidequipo())
+        {
+            $session->set('team', null);
+        }
             $miembros = $this->getDoctrine()
                 ->getRepository(EquipoContienePokemon::class)
                 ->findById($equipo->getidequipo());
 
-                $pokes = [];
+            $pokes = [];
                 
-
-                $array = json_decode($this->session->get('team'));
-                var_dump($array);
+           
+            $array = json_decode($session->get('team'));
+                
             if($miembros != null && $array == null)
             {   
                 $array = [];
@@ -236,10 +244,12 @@ class EquipoController extends AbstractController
                         ->findById($equipocontpoke->getPokemonIdpoke());
                     
                     array_push($pokes, $poke);
-                    array_push($array, $poke[0]->getIdpoke());
+                    array_push($array, $equipocontpoke->getPokemonIdpoke()->getIdpoke());
                 }
 
-                $this->session->set('team', json_encode($array));
+                $session->set('team', json_encode($array));
+                $session->set('idequipo', $equipo->getidequipo());
+                
 
                 return $this->render('build/crearteam.html.twig', [
                     'equipo' => $equipo,
@@ -259,6 +269,7 @@ class EquipoController extends AbstractController
                     array_push($pokes, $poke);
                 }
                 
+                $session->set('idequipo', $equipo->getidequipo());
             
                 return $this->render('build/crearteam.html.twig', [
                     'equipo' => $equipo,
@@ -266,6 +277,8 @@ class EquipoController extends AbstractController
                     'team' => $pokes
                 ]);
             } else {
+                
+                $session->set('idequipo', $equipo->getidequipo());
                 return $this->render('build/crearteam.html.twig', [
                     'equipo' => $equipo,
                     'pokes' => $pagination,
@@ -383,4 +396,46 @@ class EquipoController extends AbstractController
   
         return $this->redirectToRoute('vaciar_team');
     }
+
+    /*
+     * @Route("/build/anadido/obj/{idpoke}", name = "add_obj")
+     *
+     * 
+     * @return void
+     
+    public function addObjeto(Request $request, Pokemon $poke): Response
+    {
+       
+        $filtro = $request->get("obj");
+        $objetos = $this->session->get('objs');
+        $array = null;
+        
+        if ($objetos == null) {
+            $array = [];
+        } else {
+            $array = json_decode($objetos, true);
+        }
+        if($filtro != null){
+            $array2 = json_decode($this->session->get('team'));
+           
+            foreach($array2 as $key => $id){
+                
+                if($id == $poke->getIdpoke())
+                {
+                    $array[$key] = $filtro;
+                }
+            }
+            
+        }
+
+        $this->session->set('objs', json_encode($array));
+
+        $idequipo = $this->session->get('idequipo');
+        $em = $this->getDoctrine()->getManager();
+        $equipos = $em->getRepository(Equipo::class)->findById($idequipo);
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $equipos[0]->getidequipo()
+        ]);
+    }*/
 }

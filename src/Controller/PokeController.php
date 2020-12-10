@@ -104,9 +104,21 @@ class PokeController extends AbstractController
         return $this->render('shared/filtroformato.html.twig', ["formatos" => $formatos]);
     }
 
-    public function filtro_nombre()
-    {
-        return $this->render('shared/filtronombre.html.twig');
+    /**
+     * @Route("/anadirobj/{idpoke}", name="add_objeto_team", methods={"GET","POST"})
+     *
+     * @param Pokemon $poke
+     * @return void
+     */
+    public function listadoObjetos(Pokemon $poke)
+    {   
+       
+        $em = $this->getDoctrine()->getManager();
+        $pokes = $em->getRepository(PokeUsaObj::class)->findById($poke->getIdpoke());
+
+        return $this->render('build/anadirobj.html.twig', [
+            'objetos' => $pokes,
+        ]);
     }
     
 

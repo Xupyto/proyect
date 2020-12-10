@@ -36,11 +36,11 @@ class PokemonRepository extends ServiceEntityRepository
     
     public function findByName($value)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.nombre like :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.idpoke', 'ASC')
-            ->getQuery()
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM App\Entity\Pokemon p WHERE p.nombre like :nombre ORDER BY p.nombre ASC'
+            )
+            ->setParameter('nombre', '%'.$value.'%')
             ->getResult()
         ;
     }

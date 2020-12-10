@@ -104,12 +104,12 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getEquipoUsuarioEmail(): ?string
+    public function getEquipoUsuarioEmail(): ?Usuario
     {
         return $this->equipoUsuarioEmail;
     }
 
-    public function getMov1(): ?string
+    public function getMov1(): ?Movimiento
     {
         return $this->mov1;
     }
@@ -121,7 +121,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getMov2(): ?string
+    public function getMov2(): ?Movimiento
     {
         return $this->mov2;
     }
@@ -133,7 +133,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getMov3(): ?string
+    public function getMov3(): ?Movimiento
     {
         return $this->mov3;
     }
@@ -145,7 +145,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getMov4(): ?string
+    public function getMov4(): ?Movimiento
     {
         return $this->mov4;
     }
@@ -157,7 +157,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getObjeto(): ?string
+    public function getObjeto(): ?Objeto
     {
         return $this->objeto;
     }
@@ -169,7 +169,7 @@ class EquipoContienePokemon
         return $this;
     }
 
-    public function getHabilidad(): ?string
+    public function getHabilidad(): ?Habilidad
     {
         return $this->habilidad;
     }
@@ -183,7 +183,7 @@ class EquipoContienePokemon
 
    
 
-    public function getSpread(): ?string
+    public function getSpread(): ?Spread
     {
         return $this->spread;
     }

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{path('add_obj', {'idpoke': objetos[0].pokemonIdpoke.idpoke })}}" method="POST" class="mantenimiento">
+    
+        <select name="obj" required>
+            <option value="">Seleccione un objeto</option>
+          {% for obj in objetos %}
+            <option value ="{{obj.objetoIdobjeto.idobjeto}}">{{obj.objetoIdobjeto.nombre}}</option>
+          {% else %}
+            <option value ="">No hay objetos.</option>
+        {% endfor %}
+        </select>
+    
+     <input type="submit" value="Confirmar" class="btn btn-primary" />
+</form>
+
+{% endblock %}

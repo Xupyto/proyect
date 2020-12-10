@@ -9,7 +9,7 @@
             <div class="row">
         {% endif %}
                 
-                    <div class="noticia col-md-4 col-sm-6 col-12">
+                    <div class="noticia col-md-3 col-sm-6 col-12">
                         <img class="show" src="{{ asset('imagenes//noticias//'~ articulo.foto) }}">
                         <h3>{{articulo.titulo}}</h3>
                         <a data-toggle="modal" data-target={{'#modalcompra' ~ articulo.idarticulo}}>{{articulo.contenido|slice(0,50)}}</a>

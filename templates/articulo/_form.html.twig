@@ -1,4 +1,8 @@
 {{ form_start(form, {attr:{'class' : 'mantenimiento', 'id':'articuloform'}}) }}
-   {{ form_widget(form) }}
+  
+    {{form_row(form.titulo)}}
+    {{form_label(form.contenido, 'Contenido de la noticia: ')}}
+    {{form_widget(form.contenido, {attr:{'class':'form-control','rows':'10'}}) }}
+     {{ form_widget(form) }}
     <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

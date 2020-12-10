@@ -32,6 +32,105 @@ $(document).ready(function() {
             }
         }
     })
+
+    $("#pokepartnerformatform").validate({
+        rules: {
+            'pokemon_tiene_partner[porcentajeUso]' : {
+                required: true,
+                range: [0.001,100]
+            },
+            'pokemon_tiene_partner[formato]' : {
+                required: true,
+            },
+            'pokemon_tiene_partner[pokemonIdpoke]' : {
+                required: true,
+            },
+            'pokemon_tiene_partner[pokemonIdpoke1]' : {
+                required: true,
+            }
+
+        },messages : {
+            'pokemon_tiene_partner[porcentajeUso]' : {
+                required: "No puede dejar este campo vacío.",
+                range: "Debe ser un valor entre 0,001 y 100."
+            },
+            'pokemon_tiene_partner[formato]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'pokemon_tiene_partner[pokemonIdpoke]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'pokemon_tiene_partner[pokemonIdpoke1]' : {
+                required: "No puedes dejar este campo vacío.",
+            }
+        }
+    })
+    
+    $("#pokehabformatform").validate({
+        rules: {
+            'poke_tiene_habilidad[porcentajeUso]' : {
+                required: true,
+                range: [0.001,100]
+            },
+            'poke_tiene_habilidad[formato]' : {
+                required: true,
+            },
+            'poke_tiene_habilidad[pokemonIdpoke]' : {
+                required: true,
+            },
+            'poke_tiene_habilidad[habilidad]' : {
+                required: true,
+            }
+
+        },messages : {
+            'poke_tiene_habilidad[porcentajeUso]' : {
+                required: "No puede dejar este campo vacío.",
+                range: "Debe ser un valor entre 0,001 y 100."
+            },
+            'poke_tiene_habilidad[formato]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'poke_tiene_habilidad[pokemonIdpoke]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'poke_tiene_habilidad[habilidad]' : {
+                required: "No puedes dejar este campo vacío.",
+            }
+        }
+    })
+
+    $("#pokespreadformatform").validate({
+        rules: {
+            'pokemon_tiene_spread[porcentajeUso]' : {
+                required: true,
+                range: [0.001,100]
+            },
+            'pokemon_tiene_spread[formato]' : {
+                required: true,
+            },
+            'pokemon_tiene_spread[pokemonIdpoke]' : {
+                required: true,
+            },
+            'pokemon_tiene_spread[spreadIdspread]' : {
+                required: true,
+            }
+
+        },messages : {
+            'pokemon_tiene_spread[porcentajeUso]' : {
+                required: "No puede dejar este campo vacío.",
+                range: "Debe ser un valor entre 0,001 y 100."
+            },
+            'pokemon_tiene_spread[formato]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'pokemon_tiene_spread[pokemonIdpoke]' : {
+                required: "No puedes dejar este campo vacío.",
+            },
+            'pokemon_tiene_spread[spreadIdspread]' : {
+                required: "No puedes dejar este campo vacío.",
+            }
+        }
+    })
     
     $("#pokeobjformatform").validate({
         rules: {
@@ -106,6 +205,79 @@ $(document).ready(function() {
             }
         })
 
+    $("#articuloform").validate({
+            rules: {
+                'articulo[titulo]' : {
+                    required: true,
+                    rangelength: [2, 40]
+                },
+                'articulo[contenido]' : {
+                    required: true,
+                    rangelength: [10, 65535]
+                }
+            },messages : {
+                'articulo[titulo]' : {
+                    required: "No puede dejar este campo vacío.",
+                    rangelength: "El rango del título debe ser de 2 a 40 caractéres."
+                   
+                },
+                'articulo[contenido]' : {
+                    required: "No puede dejar este campo vacío.",
+                    rangelength: "El rango del título debe ser de 10 a 65535 caractéres."
+                }
+            }
+        })
+
+    $("#registrationform").validate({
+        rules: {
+            'registration_form[email]' : {
+                required: true,
+                email: true,
+                rangelength: [5,50]
+            },
+            'registration_form[password]' : {
+                required: true,
+                rangelength: [4,20]
+            }
+        },messages : {
+            'registration_form[email]' : {
+                required: "No puede dejar este campo vacío.",
+                email: "Debe ser un email correcto.",
+                rangelength: "El número de caractéres del email debe ser de 5 a 50."
+               
+            },
+            'registration_form[password]' : {
+                required: "No puede dejar este campo vacío.",
+                rangelength: "El rango de la contraseña debe ser de 4 a 20 caractéres."
+            }
+        }
+    })
+    
+    $("#loginform").validate({
+        rules: {
+            'email' : {
+                required: true,
+                email: true,
+                rangelength: [5,50]
+            },
+            'password' : {
+                required: true,
+                rangelength: [4,20]
+            }
+        },messages : {
+            'email' : {
+                required: "No puede dejar este campo vacío.",
+                email: "Debe ser un email correcto.",
+                rangelength: "El número de caractéres del email debe ser de 5 a 50."
+               
+            },
+            'password' : {
+                required: "No puede dejar este campo vacío.",
+                rangelength: "El rango de la contraseña debe ser de 4 a 20 caractéres."
+            }
+        }
+    })
+
     $("#objetoform").validate({
         rules: {
             'objeto[nombre]' : {
@@ -135,6 +307,24 @@ $(document).ready(function() {
                 rangelength: "El rango del nombre debe ser de 2 a 40 caractéres."
             },
             'movimiento[tipoNombre]' : {
+                required: "No puedes dejar este campo vacío."
+            }
+        }
+    })
+
+    $("#equipoform").validate({
+        rules: {
+            'equipo[nombre]' : {
+                required: true,
+            },
+            'equipo[usuarioEmail]' : {
+                required: true
+            }
+        },messages : {
+            'equipo[nombre]' : {
+                required: "No puede dejar este campo vacío.",
+            },
+            'equipo[usuarioEmail]' : {
                 required: "No puedes dejar este campo vacío."
             }
         }

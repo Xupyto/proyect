@@ -25,7 +25,7 @@ class ArticuloType extends AbstractType
                    
                     new File([
                         'mimeTypes' => [
-                            'image/png', 'image/jpg'
+                            'image/png', 'image/jpeg'
                         ],
                         'mimeTypesMessage' => 'Solo se permiten imágenes',
                         'maxSize' => '5M',
