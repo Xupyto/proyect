@@ -55,7 +55,7 @@ class Objeto
 
     public function __toString()
     {
-        return $this->nombre;
+        return $this->idobjeto."";
     }
 
 }

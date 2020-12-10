@@ -37,27 +37,44 @@
 <div id="team">
     <ul class="list ss">
         <div class="team-flex-wrapper">
-     
+        {% set i = 0 %}
+        
             {% for miembro in team %}
                <div id="team_"~{{miembro[0].nombre}} class="pokedex_entry team_builder_entry">
                 <li class="list-group-item ">
-                <p><img width="50" heigh="50" src="{{ asset('imagenes//'~ miembro[0].foto) }}" alt="{{miembro[0].nombre}}"> {{ miembro[0].nombre }} </p>
-                </br>
+                <img width="50" heigh="50" src="{{ asset('imagenes//'~ miembro[0].foto) }}" alt="{{miembro[0].nombre}}"> {{ miembro[0].nombre }} 
+                
                 <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[0].nombre ) }}" alt="{{miembro[0].tipoNombre[0].nombre}}">
                     {% if miembro[0].tipoNombre[1] is defined %}
                         <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[1].nombre ) }}" alt="{{miembro[0].tipoNombre[1].nombre}}">
                     {% endif %}
+                    
+                    {% if objs[i] != 'Ninguno' %}
+                        <p>Objeto: {{objs[i].nombre }} <a class="btn btn-danger" href="{{ path('remove_obj', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>  
+                        {% else %}
+                    <a <a class="btn btn-success" href="{{ path('add_objeto_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ objeto</a>                    
+                   {% endif %}
+                    {% if habs[i] != 'Ninguna' %}
+                        <p>{{habs[i].nombre }}</p><a> - </a>
+                        {% else %}
+                    <button>+ habilidad</button>                    
+                   {% endif %}
                 </li>
-                
+              
+               
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button id="a{{miembro[0].idpoke}}" class="btn btn-danger delete">Eliminar</button>
                 </div>
                 </div>
+                 {% set i = i + 1 %}
                 {% else %}
                             <div>
                                 <p>No hay pokes.</p>
                             </div>
+           
             {% endfor %}
+       
+      
         </div>
     </ul>
 </div>

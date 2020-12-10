@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pokemon;
 use App\Entity\Formato;
 use App\Entity\Articulo;
+use App\Entity\Equipo;
 use App\Entity\PokemonEstaEnFormato;
 use App\Entity\PokemonTienePartner;
 use App\Entity\PokemonTieneSpread;
@@ -105,19 +106,21 @@ class PokeController extends AbstractController
     }
 
     /**
-     * @Route("/anadirobj/{idpoke}", name="add_objeto_team", methods={"GET","POST"})
+     * @Route("/anadirobj/{idequipo}/{idpoke}", name="add_objeto_team", methods={"GET","POST"})
      *
      * @param Pokemon $poke
      * @return void
      */
-    public function listadoObjetos(Pokemon $poke)
+    public function listadoObjetos(Pokemon $poke, Equipo $eq)
     {   
        
         $em = $this->getDoctrine()->getManager();
-        $pokes = $em->getRepository(PokeUsaObj::class)->findById($poke->getIdpoke());
+        $objs = $em->getRepository(PokeUsaObj::class)->findById($poke->getIdpoke());
 
         return $this->render('build/anadirobj.html.twig', [
-            'objetos' => $pokes,
+            'objetos' => $objs,
+            'poke' => $poke,
+            'equipo' => $eq
         ]);
     }
     
