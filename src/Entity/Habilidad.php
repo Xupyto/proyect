@@ -55,7 +55,7 @@ class Habilidad
 
     public function __toString()
     {
-        return $this->nombre;
+        return $this->idhabilidad."";
     }
 
 }

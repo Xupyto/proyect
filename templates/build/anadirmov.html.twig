@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{path('add_mov', {'idpoke': poke.idpoke, 'idequipo': equipo.idequipo,'n': indicador })}}" method="POST" class="mantenimiento">
+    
+        <select name="mov" required>
+          {% for mov in movs %}
+            <option value ="{{mov.movimiento.idMov}}">{{mov.movimiento.nombre}}</option>
+          {% else %}
+            <option value ="">No hay movimientos.</option>
+        {% endfor %}
+        </select>
+    
+     <input type="submit" value="Confirmar" class="btn btn-primary" />
+</form>
+
+{% endblock %}

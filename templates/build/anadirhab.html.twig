@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{path('add_hab', {'idpoke': poke.idpoke, 'idequipo': equipo.idequipo })}}" method="POST" class="mantenimiento">
+    
+        <select name="hab" required>
+          {% for hab in habilidades %}
+            <option value ="{{hab.habilidad.idhabilidad}}">{{hab.habilidad.nombre}}</option>
+          {% else %}
+            <option value ="">No hay habilidades.</option>
+        {% endfor %}
+        </select>
+    
+     <input type="submit" value="Confirmar" class="btn btn-primary" />
+</form>
+
+{% endblock %}

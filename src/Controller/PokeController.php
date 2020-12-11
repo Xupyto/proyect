@@ -124,6 +124,63 @@ class PokeController extends AbstractController
         ]);
     }
     
+    /**
+     * @Route("/anadirhab/{idequipo}/{idpoke}", name="add_habilidad_team", methods={"GET","POST"})
+     *
+     * @param Pokemon $poke
+     * @return void
+     */
+    public function listadoHabilidades(Pokemon $poke, Equipo $eq)
+    {   
+       
+        $em = $this->getDoctrine()->getManager();
+        $habs = $em->getRepository(PokeTieneHabilidad::class)->findById($poke->getIdpoke());
+
+        return $this->render('build/anadirhab.html.twig', [
+            'habilidades' => $habs,
+            'poke' => $poke,
+            'equipo' => $eq
+        ]);
+    }
+
+    /**
+     * @Route("/anadirspread/{idequipo}/{idpoke}", name="add_spread_team", methods={"GET","POST"})
+     *
+     * @param Pokemon $poke
+     * @return void
+     */
+    public function listadoSpreads(Pokemon $poke, Equipo $eq)
+    {   
+       
+        $em = $this->getDoctrine()->getManager();
+        $spreads = $em->getRepository(PokemonTieneSpread::class)->findById($poke->getIdpoke());
+
+        return $this->render('build/anadirspread.html.twig', [
+            'spreads' => $spreads,
+            'poke' => $poke,
+            'equipo' => $eq
+        ]);
+    }
+
+    /**
+     * @Route("/anadirmov/{idequipo}/{idpoke}/{n}", name="add_mov_team", methods={"GET","POST"})
+     *
+     * @param Pokemon $poke
+     * @return void
+     */
+    public function listadoMovimientos(Pokemon $poke, Equipo $eq, int $n)
+    {   
+       
+        $em = $this->getDoctrine()->getManager();
+        $movs = $em->getRepository(PokePuedeAprenderMov::class)->findById($poke->getIdpoke());
+
+        return $this->render('build/anadirmov.html.twig', [
+            'movs' => $movs,
+            'poke' => $poke,
+            'equipo' => $eq,
+            'indicador' => $n
+        ]);
+    }
 
 
 

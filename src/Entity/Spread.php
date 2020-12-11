@@ -53,7 +53,7 @@ class Spread
 
     public function __toString()
     {
-        return $this->stats;
+        return $this->idspread."";
     }
 
 }

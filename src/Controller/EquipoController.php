@@ -350,7 +350,7 @@ class EquipoController extends AbstractController
                     if($habilidad != null)
                     {
                         array_push($habs, $habilidad);
-                        array_push($arraypoke, $habilidad[0]->getIdhabilidad());
+                        array_push($arraypoke, $habilidad->getIdhabilidad());
                     } else {
                         array_push($habs, "Ninguna");
                         array_push($arraypoke, "Ninguna");
@@ -359,7 +359,7 @@ class EquipoController extends AbstractController
                     if($spread != null)
                     {
                         array_push($spreads, $spread);
-                        array_push($arraypoke, $spread[0]->getIdspread());
+                        array_push($arraypoke, $spread->getIdspread());
                     } else {
                         array_push($spreads, "Ninguno");
                         array_push($arraypoke, "Ninguno");
@@ -368,7 +368,7 @@ class EquipoController extends AbstractController
                     if($mov1 != null)
                     {
                         array_push($movs1, $mov1);
-                        array_push($arraypoke, $mov1[0]->getIdMov());
+                        array_push($arraypoke, $mov1->getIdMov());
                     } else {
                         array_push($movs1, "Ninguno");
                         array_push($arraypoke, "Ninguno");
@@ -377,7 +377,7 @@ class EquipoController extends AbstractController
                     if($mov2 != null)
                     {
                         array_push($movs2, $mov2);
-                        array_push($arraypoke, $mov2[0]->getIdMov());
+                        array_push($arraypoke, $mov2->getIdMov());
                     } else {
                         array_push($movs2, "Ninguno");
                         array_push($arraypoke, "Ninguno");
@@ -386,7 +386,7 @@ class EquipoController extends AbstractController
                     if($mov3 != null)
                     {
                         array_push($movs3, $mov3);
-                        array_push($arraypoke, $mov3[0]->getIdMov());
+                        array_push($arraypoke, $mov3->getIdMov());
                     } else {
                         array_push($movs3, "Ninguno");
                         array_push($arraypoke, "Ninguno");
@@ -395,7 +395,7 @@ class EquipoController extends AbstractController
                     if($mov4 != null)
                     {
                         array_push($movs4, $mov4);
-                        array_push($arraypoke, $mov4[0]->getIdMov());
+                        array_push($arraypoke, $mov4->getIdMov());
                     } else {
                         array_push($movs4, "Ninguno");
                         array_push($arraypoke, "Ninguno");
@@ -680,7 +680,7 @@ class EquipoController extends AbstractController
                     $habilidad = $this->getDoctrine()
                         ->getRepository(Habilidad::class)
                         ->find($equipocontpoke[2]);
-                    $eq->setHabilidad($habilidad[0]);
+                    $eq->setHabilidad($habilidad);
                 }
 
                 if($equipocontpoke[3] != "Ninguno")
@@ -688,7 +688,7 @@ class EquipoController extends AbstractController
                     $spread = $this->getDoctrine()
                         ->getRepository(Spread::class)
                         ->find($equipocontpoke[3]);
-                    $eq->setSpread($spread[0]);
+                    $eq->setSpread($spread);
                 }
 
                 if($equipocontpoke[4] != "Ninguno")
@@ -696,7 +696,7 @@ class EquipoController extends AbstractController
                     $mov1 = $this->getDoctrine()
                         ->getRepository(Movimiento::class)
                         ->find($equipocontpoke[4]);
-                    $eq->setMov1($mov1[0]);
+                    $eq->setMov1($mov1);
                 }
 
                 if($equipocontpoke[5] != "Ninguno")
@@ -704,7 +704,7 @@ class EquipoController extends AbstractController
                     $mov2 = $this->getDoctrine()
                         ->getRepository(Movimiento::class)
                         ->find($equipocontpoke[5]);
-                    $eq->setMov2($mov2[0]);
+                    $eq->setMov2($mov2);
                 }
 
                 if($equipocontpoke[6] != "Ninguno")
@@ -712,7 +712,7 @@ class EquipoController extends AbstractController
                     $mov3 = $this->getDoctrine()
                         ->getRepository(Movimiento::class)
                         ->find($equipocontpoke[6]);
-                    $eq->setMov3($mov3[0]);
+                    $eq->setMov3($mov3);
                 }
 
                 if($equipocontpoke[7] != "Ninguno")
@@ -720,7 +720,7 @@ class EquipoController extends AbstractController
                     $mov4 = $this->getDoctrine()
                         ->getRepository(Movimiento::class)
                         ->find($equipocontpoke[7]);
-                    $eq->setMov4($mov4[0]);
+                    $eq->setMov4($mov4);
                 }
 
                 $entityManager->persist($eq);
@@ -743,12 +743,21 @@ class EquipoController extends AbstractController
        
         $objeto = $request->get("obj");
         $array = json_decode($this->session->get('team'));
+        $estacogido = false;
         
         if($objeto != null && $objeto != ""){
   
             for($i=0;$i<sizeof($array);$i++)
             {
-                if($array[$i][0] == $poke->getIdpoke())
+                if($array[$i][1] == intval($objeto))
+                {
+                    $estacogido = true;
+                    
+                } 
+            }
+            for($i=0;$i<sizeof($array);$i++)
+            {
+                if ($array[$i][0] == $poke->getIdpoke() && $estacogido == false)
                 {
                     $array[$i][1] = intval($objeto);
                 }
@@ -790,4 +799,182 @@ class EquipoController extends AbstractController
             'idequipo' => $eq->getidequipo()
         ]);
     }
+
+    /** 
+     * @Route("/build/anadido/hab/{idequipo}/{idpoke}", name = "add_hab")
+     *
+     * 
+     * @return void
+     */
+    public function addHabilidad(Request $request, Pokemon $poke, Equipo $eq): Response
+    {
+       
+        $habilidad = $request->get("hab");
+        $array = json_decode($this->session->get('team'));
+        
+        if($habilidad != null && $habilidad != ""){
+  
+            for($i=0;$i<sizeof($array);$i++)
+            {
+                if($array[$i][0] == $poke->getIdpoke())
+                {
+                    $array[$i][2] = intval($habilidad);
+                }
+            }
+            
+        }
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+    /** 
+     * @Route("/build/eliminado/hab/{idequipo}/{idpoke}", name = "remove_hab")
+     *
+     * 
+     * @return void
+     */
+    public function removeHabilidad(Pokemon $poke, Equipo $eq): Response
+    {
+       
+        $array = json_decode($this->session->get('team'));
+        
+        
+        for($i=0;$i<sizeof($array);$i++)
+        {
+            if($array[$i][0] == $poke->getIdpoke())
+            {
+                $array[$i][2] = "Ninguna";
+            }
+        }
+            
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+    /** 
+     * @Route("/build/anadido/spread/{idequipo}/{idpoke}", name = "add_spread")
+     *
+     * 
+     * @return void
+     */
+    public function addSpread(Request $request, Pokemon $poke, Equipo $eq): Response
+    {
+       
+        $spread = $request->get("spread");
+        $array = json_decode($this->session->get('team'));
+        
+        if($spread != null && $spread != ""){
+  
+            for($i=0;$i<sizeof($array);$i++)
+            {
+                if($array[$i][0] == $poke->getIdpoke())
+                {
+                    $array[$i][3] = intval($spread);
+                }
+            }
+            
+        }
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+    /** 
+     * @Route("/build/eliminado/spread/{idequipo}/{idpoke}", name = "remove_spread")
+     *
+     * 
+     * @return void
+     */
+    public function removeSpread(Pokemon $poke, Equipo $eq): Response
+    {
+       
+        $array = json_decode($this->session->get('team'));
+        
+        
+        for($i=0;$i<sizeof($array);$i++)
+        {
+            if($array[$i][0] == $poke->getIdpoke())
+            {
+                $array[$i][3] = "Ninguno";
+            }
+        }
+            
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+    /** 
+     * @Route("/build/anadido/mov/{idequipo}/{idpoke}/{n}", name = "add_mov")
+     *
+     * 
+     * @return void
+     */
+    public function addMov(Request $request, Pokemon $poke, Equipo $eq, int $n): Response
+    {
+       
+        $mov = $request->get("mov");
+        $array = json_decode($this->session->get('team'));
+        
+        if($mov != null && $mov != ""){
+  
+            for($i=0;$i<sizeof($array);$i++)
+            {
+                if($array[$i][0] == $poke->getIdpoke())
+                {
+                    if($array[$i][4] != intval($mov) && $array[$i][5] != intval($mov) && $array[$i][6] != intval($mov) && $array[$i][7] != intval($mov))
+                    {
+                        $array[$i][$n+4] = intval($mov);
+                    }
+                   
+                }
+            }
+            
+        }
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+
+    /** 
+     * @Route("/build/eliminado/mov/{idequipo}/{idpoke}/{n}", name = "remove_mov")
+     *
+     * 
+     * @return void
+     */
+    public function removeMov(Pokemon $poke, Equipo $eq, int $n): Response
+    {
+       
+        $array = json_decode($this->session->get('team'));
+        
+        
+        for($i=0;$i<sizeof($array);$i++)
+        {
+            if($array[$i][0] == $poke->getIdpoke())
+            {
+                $array[$i][$n+4] = "Ninguno";
+            }
+        }
+            
+        
+        $this->session->set('team', json_encode($array));
+
+        return $this->redirectToRoute('build_pokes', [
+            'idequipo' => $eq->getidequipo()
+        ]);
+    }
+
 }

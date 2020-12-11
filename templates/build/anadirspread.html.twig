@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{path('add_spread', {'idpoke': poke.idpoke, 'idequipo': equipo.idequipo })}}" method="POST" class="mantenimiento">
+    
+        <select name="spread" required>
+          {% for spread in spreads %}
+            <option value ="{{spread.spreadIdspread.idspread}}">{{spread.spreadIdspread.stats}}</option>
+          {% else %}
+            <option value ="">No hay spreads.</option>
+        {% endfor %}
+        </select>
+    
+     <input type="submit" value="Confirmar" class="btn btn-primary" />
+</form>
+
+{% endblock %}

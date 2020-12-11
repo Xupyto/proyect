@@ -48,16 +48,42 @@
                     {% if miembro[0].tipoNombre[1] is defined %}
                         <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[1].nombre ) }}" alt="{{miembro[0].tipoNombre[1].nombre}}">
                     {% endif %}
-                    
+                    <br>
                     {% if objs[i] != 'Ninguno' %}
                         <p>Objeto: {{objs[i].nombre }} <a class="btn btn-danger" href="{{ path('remove_obj', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>  
                         {% else %}
-                    <a <a class="btn btn-success" href="{{ path('add_objeto_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ objeto</a>                    
+                    <a class="btn btn-success" href="{{ path('add_objeto_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ objeto</a>                    
                    {% endif %}
                     {% if habs[i] != 'Ninguna' %}
-                        <p>{{habs[i].nombre }}</p><a> - </a>
+                        <p>Habilidad: {{habs[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_hab', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>
                         {% else %}
-                    <button>+ habilidad</button>                    
+                    <a class="btn btn-success" href="{{ path('add_habilidad_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ habilidad</a>                      
+                   {% endif %}
+                   {% if spreads[i] != 'Ninguno' %}
+                        <p>Spread: {{spreads[i].stats }}<a class="btn btn-danger" href="{{ path('remove_spread', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_spread_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ spread</a>                      
+                   {% endif %}
+                   <p>Movimientos</p>
+                   {% if movs1[i] != 'Ninguno' %}
+                        <p>Mov1: {{movs1[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}">-</a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}">+</a>                      
+                   {% endif %}
+                   {% if movs2[i] != 'Ninguno' %}
+                        <p>Mov2: {{movs2[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}">-</a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}">+</a>                      
+                   {% endif %}
+                   {% if movs3[i] != 'Ninguno' %}
+                        <p>Mov3: {{movs3[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}">-</a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}">+</a>                      
+                   {% endif %}
+                   {% if movs4[i] != 'Ninguno' %}
+                        <p>Mov4: {{movs4[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}">-</a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}">+</a>                      
                    {% endif %}
                 </li>
               

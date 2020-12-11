@@ -77,7 +77,7 @@ class Movimiento
 
     public function __toString()
     {
-        return $this->nombre;
+        return $this->idMov."";
     }
 
 }
