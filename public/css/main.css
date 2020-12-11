@@ -1,3 +1,9 @@
+body {
+    /*background-image: url("h.jpg");
+    background-color:rgba(0, 0, 0, 0.5);*/
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("h.jpg");
+}
+
 #formlogin {
     width: 30%;
     margin: 50px auto;
@@ -25,6 +31,7 @@
 
 .titulo {
     text-align: center;
+    font-family: "Pokemon Solid";
 }
 
 table.titulo {

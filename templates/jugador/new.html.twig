@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear nuevo jugador{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Crear nuevo jugador</h1>
+
+    {{ include('jugador/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('jugador_index') }}">Volver al listado</a>
+{% endblock %}

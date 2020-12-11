@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado de campeonatos{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Listado de campeonatos</h1>
+
+    <table class="table table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Id campeonato</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Formato</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for campeonato in campeonatos %}
+            <tr>
+                <td>{{ campeonato.idcampeonato }}</td>
+                <td>{{ campeonato.nombre }}</td>
+                <td>{{ campeonato.categoria }}</td>
+                <td>{{ campeonato.formato.nombre }}</td>
+                <td>
+                    
+                    <a class="btn btn-primary"  href="{{ path('campeonato_edit', {'idcampeonato': campeonato.idcampeonato}) }}">Editar</a>
+                    {{ include('campeonato/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay resultados.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ {# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(campeonatos) }}
+</div>
+    <a class="btn btn-primary crear" href="{{ path('campeonato_new') }}">Crear nuevo</a>
+{% endblock %}

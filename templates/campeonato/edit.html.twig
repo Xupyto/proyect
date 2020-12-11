@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar campeonato{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar campeonato</h1>
+
+    {{ include('campeonato/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+     <a class="btn btn-primary" href="{{ path('campeonato_index') }}">Volver al listado</a>
+
+    
+{% endblock %}

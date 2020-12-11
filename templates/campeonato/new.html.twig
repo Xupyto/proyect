@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear nuevo campeonato{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Crear nuevo campeonato</h1>
+
+    {{ include('campeonato/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('campeonato_index') }}">Volver al listado</a>
+{% endblock %}

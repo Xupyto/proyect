@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('campeonato_delete', {'idcampeonato': campeonato.idcampeonato}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campeonato.idcampeonato) }}">
+    <button class="btn btn-primary">Borrar</button>
+</form>
