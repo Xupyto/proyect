@@ -17,6 +17,9 @@
         <li class="nav-item">
         <a class="nav-link" href="{{path('articulos_index')}}">Artículos</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('filtro_format_torneo')}}">Torneos</a>
+      </li>
       
       {% if is_granted('ROLE_ADMIN') %}
       <li class="nav-item dropdown">
@@ -46,6 +49,7 @@
           <a class="dropdown-item" href="{{path('poke_tiene_habilidad_index')}}">Pokemon - Habilidad</a>
           <a class="dropdown-item" href="{{path('pokemon_tiene_spread_index')}}">Pokemon - Spread</a>
           <a class="dropdown-item" href="{{path('pokemon_tiene_partner_index')}}">Pokemon - Partner</a>
+          <a class="dropdown-item" href="{{path('jugador_pokes_campeonato_index')}}">Jugador - Poke - Campeonato</a>
         </div>
       </li>
       {% endif %}
@@ -53,11 +57,11 @@
     
   </div>
 {% if not app.user %}
-  <a href="{{path('app_login')}}" class="btn btn-info login">Iniciar sesión</a>
-  <a href="{{path('app_register')}}" class="btn btn-info login">Crear cuenta</a>
+  <a id="btnlogin" href="{{path('app_login')}}" class="btn btn-info login">Iniciar sesión</a>
+  <a id="btncrearcuenta" href="{{path('app_register')}}" class="btn btn-info login">Crear cuenta</a>
   {% endif %}
   {% if app.user %}
   <span>{{app.user.username}}</span>
-  <a href="{{path('app_logout')}}" class="btn btn-info login">Cerrar sesión</a>
+  <a id="btncerrar" href="{{path('app_logout')}}" class="btn btn-info login">Cerrar sesión</a>
   {% endif %}
 </nav>

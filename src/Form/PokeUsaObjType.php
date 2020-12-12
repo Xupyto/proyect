@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\PokeUsaObj;
+use App\Entity\Objeto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PokeUsaObjType extends AbstractType
 {
@@ -14,7 +16,12 @@ class PokeUsaObjType extends AbstractType
         $builder
             ->add('porcentajeUso')
             ->add('formato')
-            ->add('objetoIdobjeto')
+            ->add('objetoIdobjeto', EntityType::class, [
+                'class' => Objeto::class,
+                'choice_label' => function($mov){
+                    return $mov->getNombre();
+                }
+            ])
             ->add('pokemonIdpoke')
         ;
     }

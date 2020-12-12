@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Campeonato
  *
  * @ORM\Table(name="campeonato", indexes={@ORM\Index(name="fk_campeonato_formato1_idx", columns={"formato_Id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CampeonatoRepository")
  * @UniqueEntity(fields={"nombre"}, message="Ya hay un objeto que se llama así.")
  */
 class Campeonato

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}Participantes{% endblock %}
+{% block body %}
+
+<div class="accordion" id="accordion">
+{% set j = 0 %}
+{% set i = 0 %}
+     
+ 
+{% for poke in equipos %}
+ {% if i == 6 %}
+    {% set j = j + 1 %}
+    {% set i = 0 %}
+  {% endif %}   
+      {% if i == 0 and j == 0 %}
+      <div class="card z-depth-0 bordered">
+        <div class="card-header" id={{"heading"~j}}>
+        <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target={{"#collapse"~j}} aria-expanded="true" aria-controls={{"collapse"~j}}>
+            {{poke.jugadorIdjugador.nombre}}
+            </button>
+        </h5>
+    </div>
+    
+        <div id={{"collapse"~j}} class="collapse show" aria-labelledby={{"heading"~j}} data-parent="#accordion">
+      <div class="card-body">
+      {% elseif i == 0 %}
+        <div class="card z-depth-0 bordered">
+    <div class="card-header" id={{"heading"~j}}>
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target={{"#collapse"~j}} aria-expanded="false" aria-controls={{"collapse"~j}}>
+          {{poke.jugadorIdjugador.nombre}}
+        </button>
+      </h5>
+    </div>
+
+    <div id={{"collapse"~j}} class="collapse" aria-labelledby={{"heading"~j}} data-parent="#accordion">
+      <div class="card-body">
+       {% endif %}
+       
+        <div class="pokedex_entry team_builder_entry">
+                <li class="list-group-item ">
+                <img width="50" heigh="50" src="{{ asset('imagenes//'~ poke.pokemonIdpoke.foto) }}" alt="{{poke.pokemonIdpoke.nombre}}"> {{ poke.pokemonIdpoke.nombre }} 
+                <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.pokemonIdpoke.tipoNombre[0].nombre ) }}" alt="{{poke.pokemonIdpoke.tipoNombre[0].nombre}}">
+                    {% if poke.pokemonIdpoke.tipoNombre[1] is defined %}
+                        <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.pokemonIdpoke.tipoNombre[1].nombre ) }}" alt="{{poke.pokemonIdpoke.tipoNombre[1].nombre}}">
+                    {% endif %}
+                    <br>
+                    <p>Objeto: {{poke.objeto.nombre }}</p>                  
+                    <p>Habilidad: {{poke.habilidad.nombre }}</p>      
+                    <p>Movimientos</p>
+                    <p>Mov1: {{poke.mov1.nombre }}</p>
+                    <p>Mov2: {{poke.mov2.nombre }}</p>
+                    <p>Mov3: {{poke.mov3.nombre }}</p>
+                    <p>Mov4: {{poke.mov4.nombre }}</p>   
+                </li>
+                </div>
+        {% if i == 5 %}   
+            </div>
+            </div>
+        </div>
+        {% endif %}
+        {% set i = i + 1 %}
+        
+{% else %}
+       No hay datos.
+{% endfor %} 
+     
+</div>
+{% endblock %}

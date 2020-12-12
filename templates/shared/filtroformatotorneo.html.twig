@@ -1,0 +1,16 @@
+<div class="filtroformato">
+<form action="{{path('filtro_format_torneo')}}" method="POST">
+    <div>
+        <select name="format">
+            <option value="">Seleccione un formato</option>
+          {% for format in formatos %}
+            <option value ="{{format.id}}">{{format.nombre}}</option>
+          {% else %}
+            <option value ="">No hay formatos.</option>
+        {% endfor %}
+        </select>
+    </div>
+     <input type="submit" value="Filtrar" class="btn btn-primary" />
+</form>
+
+</div>

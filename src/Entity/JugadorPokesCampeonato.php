@@ -3,54 +3,76 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * JugadorPokesCampeonato
  *
- * @ORM\Table(name="jugador_pokes_campeonato", indexes={@ORM\Index(name="fk_jugador_has_campeonato_jugador1_idx", columns={"jugador_Idjugador"}), @ORM\Index(name="fk_jugador_has_campeonato_pokemon1_idx", columns={"pokemon_Idpoke"}), @ORM\Index(name="fk_jugador_has_campeonato_campeonato1_idx", columns={"campeonato_Idcampeonato"})})
- * @ORM\Entity
+ * @ORM\Table(name="jugador_pokes_campeonato", indexes={@ORM\Index(name="fk_jugador_has_campeonato_jugador1_idx", columns={"jugador_Idjugador"}), @ORM\Index(name="fk_jugador_has_campeonato_campeonato1_idx", columns={"campeonato_Idcampeonato"}), @ORM\Index(name="fk_jugador_has_campeonato_pokemon1_idx", columns={"pokemon_Idpoke"})})
+ * @ORM\Entity(repositoryClass="App\Repository\JugadorPokeCampeonatoRepository")
+ * @UniqueEntity(fields={"campeonatoIdcampeonato","jugadorIdjugador","pokemonIdpoke"}, message="Ya existe ese registro.")
  */
 class JugadorPokesCampeonato
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Mov1", type="integer", nullable=false)
+     * @var \Movimiento
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @ORM\ManyToOne(targetEntity="Movimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Mov1", referencedColumnName="Id_mov")
+     * })
      */
     private $mov1;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Mov2", type="integer", nullable=false)
+     * @var \Movimiento
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @ORM\ManyToOne(targetEntity="Movimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Mov2", referencedColumnName="Id_mov")
+     * })
      */
     private $mov2;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Mov3", type="integer", nullable=false)
+     * @var \Movimiento
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @ORM\ManyToOne(targetEntity="Movimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Mov3", referencedColumnName="Id_mov")
+     * })
      */
     private $mov3;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Mov4", type="integer", nullable=false)
+     * @var \Movimiento
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @ORM\ManyToOne(targetEntity="Movimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Mov4", referencedColumnName="Id_mov")
+     * })
      */
     private $mov4;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Objeto", type="integer", nullable=false)
+     * @var \Objeto
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * @ORM\ManyToOne(targetEntity="Objeto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Objeto", referencedColumnName="Idobjeto")
+     * })
      */
     private $objeto;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="Habilidad", type="integer", nullable=false)
+     * @var \Habilidad
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
+     * 
+     * @ORM\ManyToOne(targetEntity="Habilidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Habilidad", referencedColumnName="Idhabilidad")
+     * })
      */
     private $habilidad;
 
@@ -63,6 +85,7 @@ class JugadorPokesCampeonato
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="campeonato_Idcampeonato", referencedColumnName="Idcampeonato")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $campeonatoIdcampeonato;
 
@@ -75,6 +98,7 @@ class JugadorPokesCampeonato
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="jugador_Idjugador", referencedColumnName="Idjugador")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $jugadorIdjugador;
 
@@ -87,75 +111,76 @@ class JugadorPokesCampeonato
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="pokemon_Idpoke", referencedColumnName="Idpoke")
      * })
+     * @Assert\NotBlank(message="Este campo no puede dejarse vacío.")
      */
     private $pokemonIdpoke;
 
-    public function getMov1(): ?int
+    public function getMov1(): ?Movimiento
     {
         return $this->mov1;
     }
 
-    public function setMov1(int $mov1): self
+    public function setMov1(Movimiento $mov1): self
     {
         $this->mov1 = $mov1;
 
         return $this;
     }
 
-    public function getMov2(): ?int
+    public function getMov2(): ?Movimiento
     {
         return $this->mov2;
     }
 
-    public function setMov2(int $mov2): self
+    public function setMov2(Movimiento $mov2): self
     {
         $this->mov2 = $mov2;
 
         return $this;
     }
 
-    public function getMov3(): ?int
+    public function getMov3(): ?Movimiento
     {
         return $this->mov3;
     }
 
-    public function setMov3(int $mov3): self
+    public function setMov3(Movimiento $mov3): self
     {
         $this->mov3 = $mov3;
 
         return $this;
     }
 
-    public function getMov4(): ?int
+    public function getMov4(): ?Movimiento
     {
         return $this->mov4;
     }
 
-    public function setMov4(int $mov4): self
+    public function setMov4(Movimiento $mov4): self
     {
         $this->mov4 = $mov4;
 
         return $this;
     }
 
-    public function getObjeto(): ?int
+    public function getObjeto(): ?Objeto
     {
         return $this->objeto;
     }
 
-    public function setObjeto(int $objeto): self
+    public function setObjeto(Objeto $objeto): self
     {
         $this->objeto = $objeto;
 
         return $this;
     }
 
-    public function getHabilidad(): ?int
+    public function getHabilidad(): ?Habilidad
     {
         return $this->habilidad;
     }
 
-    public function setHabilidad(int $habilidad): self
+    public function setHabilidad(Habilidad $habilidad): self
     {
         $this->habilidad = $habilidad;
 

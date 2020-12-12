@@ -138,4 +138,30 @@ div img.show {
     flex-wrap: wrap;
 }
 
+.filtroformato{
+    text-align: center;   
+}
+
+.filtroformato select {
+    margin: 15px;
+    padding: 5px;
+}
+
+#btnlogin {
+    margin-right: 15px;
+}
+
+#princi th {
+    font-size: 25px;
+    color: black;
+}
+
+#princi td:first-child a {
+    color: aquamarine;
+}
+
+#princi td:first-child a:hover {
+    color: white;
+}
+
 

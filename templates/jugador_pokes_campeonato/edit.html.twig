@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Jugador - Poke - Campeonato{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Editar Jugador - Poke - Campeonato</h1>
+
+    {{ include('jugador_pokes_campeonato/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+   <a class="btn btn-primary" href="{{ path('jugador_pokes_campeonato_index') }}">Volver al listado</a>
+    
+{% endblock %}

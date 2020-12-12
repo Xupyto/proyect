@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jugador - Poke -Campeonato{% endblock %}
+
+{% block body %}
+    <h1 class="titulo">Jugador - Poke -Campeonato</h1>
+    <table class="table table-hover table-dark titulo">
+        <tbody>
+            <tr>
+                <th>Campeonato</th>
+                <td>{{ jugador_pokes_campeonato.campeonatoIdcampeonato.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Jugador</th>
+                <td>{{ jugador_pokes_campeonato.jugadorIdjugador.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Pokemon</th>
+                <td>{{ jugador_pokes_campeonato.pokemonIdpoke.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Movimiento 1</th>
+                <td>{{ jugador_pokes_campeonato.mov1.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Movimiento 2</th>
+                <td>{{ jugador_pokes_campeonato.mov2.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Movimiento 3</th>
+                <td>{{ jugador_pokes_campeonato.mov3.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Movimiento 4</th>
+                <td>{{ jugador_pokes_campeonato.mov4.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Objeto</th>
+                <td>{{ jugador_pokes_campeonato.objeto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Habilidad</th>
+                <td>{{ jugador_pokes_campeonato.habilidad.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('jugador_pokes_campeonato_index') }}">Volver al listado</a>
+
+    <a class="btn btn-primary" href="{{ path('jugador_pokes_campeonato_edit', {'campeonato': jugador_pokes_campeonato.campeonatoIdcampeonato.idcampeonato,
+'jugador': jugador_pokes_campeonato.jugadorIdjugador.idjugador, 'poke': jugador_pokes_campeonato.pokemonIdpoke.idpoke}) }}">Editar</a>
+
+    {{ include('jugador_pokes_campeonato/_delete_form.html.twig') }}
+{% endblock %}

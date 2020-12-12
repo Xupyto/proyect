@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\PokePuedeAprenderMov;
+use App\Entity\Movimiento;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PokePuedeAprenderMovType extends AbstractType
 {
@@ -14,7 +16,12 @@ class PokePuedeAprenderMovType extends AbstractType
         $builder
             ->add('porcentajeUso')
             ->add('formato')
-            ->add('movimiento')
+            ->add('movimiento', EntityType::class, [
+                'class' => Movimiento::class,
+                'choice_label' => function($mov){
+                    return $mov->getNombre();
+                }
+            ])
             ->add('pokemonIdpoke')
         ;
     }

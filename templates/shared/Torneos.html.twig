@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Torneos{% endblock %}
+{% block body %}
+
+ {{ render(controller(
+          'App\\Controller\\PokeController::filtro_formato_torneo'
+      )) }}
+
+<table class="table table table-hover table-dark titulo">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for campeonato in camps %}
+            <tr>
+                <td>{{ campeonato.nombre }}</td>
+                <td>{{ campeonato.categoria }}</td>
+                <td>
+                    
+                    <a class="btn btn-primary"  href="{{ path('ver_participantes', {'campeonato': campeonato.idcampeonato}) }}">Mostrar datos</a>
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hay campeonatos con ese formato.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

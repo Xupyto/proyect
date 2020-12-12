@@ -6,6 +6,7 @@ use App\Entity\Pokemon;
 use App\Entity\Formato;
 use App\Entity\Articulo;
 use App\Entity\Equipo;
+use App\Entity\Campeonato;
 use App\Entity\PokemonEstaEnFormato;
 use App\Entity\PokemonTienePartner;
 use App\Entity\PokemonTieneSpread;
@@ -71,19 +72,22 @@ class PokeController extends AbstractController
         
         $mensaje = "Formato ".$pokemons[0]->getFormato()->getNombre();
         $pokes = [];
+        $porcentajes = [];
         foreach ( $pokemons as $pokeisformat)
         {
             $pokes [] = $pokeisformat->getPokemonIdpoke();
+            $porcentajes []= $pokeisformat->getPorcentajeUso();
         }
 
-        $porcentajes = [];
     
-        for($i = 0; $i<sizeof($pokes);$i++){
-            $porcentajes []= $em->getRepository(PokemonEstaEnFormato::class)->findById($pokes[$i]->getIdpoke());
-        }
 
         $pagination = $paginator->paginate(
             $pokes,
+            $request->query->getInt("page", 1),
+            5
+        );
+        $pagination2 = $paginator->paginate(
+            $porcentajes,
             $request->query->getInt("page", 1),
             5
         );
@@ -91,7 +95,7 @@ class PokeController extends AbstractController
 
         return $this->render('poke/index.html.twig', [
             'pokes' => $pagination,
-            'porcentajes' => $porcentajes,
+            'porcentajes' => $pagination2,
             'filtro' => $mensaje,
             'format' => $format
         ]);
@@ -103,6 +107,14 @@ class PokeController extends AbstractController
         $formatos = $em->getRepository(Formato::class)->findAll();
 
         return $this->render('shared/filtroformato.html.twig', ["formatos" => $formatos]);
+    }
+
+    public function filtro_formato_torneo()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $formatos = $em->getRepository(Formato::class)->findAll();
+
+        return $this->render('shared/filtroformatotorneo.html.twig', ["formatos" => $formatos]);
     }
 
     /**
@@ -599,6 +611,8 @@ class PokeController extends AbstractController
             ]
         );
     }
+
+   
 
     
 

@@ -292,6 +292,34 @@ $(document).ready(function() {
         }
     })
 
+    $("#campeonatoform").validate({
+        rules: {
+            'campeonato1[nombre]' : {
+                required: true,
+                rangelength: [2, 45]
+            },
+            'campeonato1[categoria]' : {
+                required: true,
+                rangelength: [2, 45]
+            },
+            'campeonato1[formato]': {
+                required: true
+            }
+        },messages : {
+            'movimiento[nombre]' : {
+                required: "No puede dejar este campo vacío.",
+                rangelength: "El rango del nombre debe ser de 2 a 45 caractéres."
+            },
+            'campeonato1[categoria]' : {
+                required: "No puede dejar este campo vacío.",
+                rangelength: "El rango del nombre debe ser de 2 a 45 caractéres."
+            },
+            'campeonato1[formato]': {
+                required: true
+            }
+        }
+    })
+
     $("#movimientoform").validate({
         rules: {
             'movimiento[nombre]' : {
@@ -326,6 +354,20 @@ $(document).ready(function() {
             },
             'equipo[usuarioEmail]' : {
                 required: "No puedes dejar este campo vacío."
+            }
+        }
+    })
+
+    $("#jugadorform").validate({
+        rules: {
+            'jugador1[nombre]' : {
+                required: true,
+                rangelength: [2, 45]
+            }
+        },messages : {
+            'jugador1[nombre]' : {
+                required: "No puede dejar este campo vacío.",
+                rangelength: "El rango del nombre debe ser de 2 a 45 caractéres."
             }
         }
     })
@@ -476,4 +518,65 @@ $(document).ready(function() {
             },
         }
     });
+
+    $("#jugadorpokecampform").validate({
+        rules: {
+            'jugador_pokes_campeonato[pokemonIdpoke]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[mov1]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[mov2]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[mov3]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[mov4]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[objeto]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[habilidad]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[campeonatoIdcampeonato]' : {
+                required: true
+            },
+            'jugador_pokes_campeonato[jugadorIdjugador]' : {
+                required: true
+            },
+            
+        },messages : {
+            'jugador_pokes_campeonato[pokemonIdpoke]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[mov1]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[mov2]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[mov3]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[mov4]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[objeto]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[habilidad]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[campeonatoIdcampeonato]' : {
+                required: "No puede dejar este campo vacío."
+            },
+            'jugador_pokes_campeonato[jugadorIdjugador]' : {
+                required: "No puede dejar este campo vacío."
+            }
+        }
+    })
   });
