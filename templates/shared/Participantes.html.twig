@@ -38,7 +38,7 @@
       <div class="card-body">
        {% endif %}
        
-        <div class="pokedex_entry team_builder_entry">
+        <div class="pokedex_entry">
                 <li class="list-group-item ">
                 <img width="50" heigh="50" src="{{ asset('imagenes//'~ poke.pokemonIdpoke.foto) }}" alt="{{poke.pokemonIdpoke.nombre}}"> {{ poke.pokemonIdpoke.nombre }} 
                 <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.pokemonIdpoke.tipoNombre[0].nombre ) }}" alt="{{poke.pokemonIdpoke.tipoNombre[0].nombre}}">
@@ -49,10 +49,10 @@
                     <p><span class="objeto">Objeto</span>: {{poke.objeto.nombre }}<br>                  
                     <span class="hab">Habilidad</span>: {{poke.habilidad.nombre }}<br>     
                     <span class="movs">Movimientos</span><br> 
-                    <span class="mov">Mov1</span>: {{poke.mov1.nombre }}<br> 
-                    <span class="mov">Mov2</span>: {{poke.mov2.nombre }}<br> 
-                    <span class="mov">Mov3</span>: {{poke.mov3.nombre }}<br> 
-                    <span class="mov">Mov4</span>: {{poke.mov4.nombre }}</p>   
+                    <span class="mov">Mov1</span>: {{poke.mov1.nombre }}<img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.mov1.tipoNombre ) }}" alt="{{poke.mov1.tipoNombre}}"><br> 
+                    <span class="mov">Mov2</span>: {{poke.mov2.nombre }}<img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.mov2.tipoNombre ) }}" alt="{{poke.mov2.tipoNombre}}"><br> 
+                    <span class="mov">Mov3</span>: {{poke.mov3.nombre }}<img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.mov3.tipoNombre ) }}" alt="{{poke.mov3.tipoNombre}}"><br> 
+                    <span class="mov">Mov4</span>: {{poke.mov4.nombre }}<img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.mov4.tipoNombre ) }}" alt="{{poke.mov4.tipoNombre}}"></p>   
                 </li>
                 </div>
         {% if i == 5 %}   
