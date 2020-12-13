@@ -6,4 +6,5 @@
     {{ form_widget(form) }}
     {{form_errors(form.campeonatoIdcampeonato)}}
    <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+    <a class="btn btn-primary" href="{{ path('jugador_pokes_campeonato_index') }}">Volver al listado</a>
 {{ form_end(form) }}

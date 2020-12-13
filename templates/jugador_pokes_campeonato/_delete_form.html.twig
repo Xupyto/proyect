@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('jugador_pokes_campeonato_delete', {'campeonato': jugador_pokes_campeonato.campeonatoIdcampeonato.idcampeonato,
+<form id="deletechamps" ethod="post" action="{{ path('jugador_pokes_campeonato_delete', {'campeonato': jugador_pokes_campeonato.campeonatoIdcampeonato.idcampeonato,
 'jugador': jugador_pokes_campeonato.jugadorIdjugador.idjugador, 'poke': jugador_pokes_campeonato.pokemonIdpoke.idpoke}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
     <input type="hidden" name="_method" value="DELETE">
     <button class="btn btn-primary">Borrar</button>

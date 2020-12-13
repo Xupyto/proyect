@@ -46,13 +46,13 @@
                         <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.pokemonIdpoke.tipoNombre[1].nombre ) }}" alt="{{poke.pokemonIdpoke.tipoNombre[1].nombre}}">
                     {% endif %}
                     <br>
-                    <p>Objeto: {{poke.objeto.nombre }}</p>                  
-                    <p>Habilidad: {{poke.habilidad.nombre }}</p>      
-                    <p>Movimientos</p>
-                    <p>Mov1: {{poke.mov1.nombre }}</p>
-                    <p>Mov2: {{poke.mov2.nombre }}</p>
-                    <p>Mov3: {{poke.mov3.nombre }}</p>
-                    <p>Mov4: {{poke.mov4.nombre }}</p>   
+                    <p><span class="objeto">Objeto</span>: {{poke.objeto.nombre }}<br>                  
+                    <span class="hab">Habilidad</span>: {{poke.habilidad.nombre }}<br>     
+                    <span class="movs">Movimientos</span><br> 
+                    <span class="mov">Mov1</span>: {{poke.mov1.nombre }}<br> 
+                    <span class="mov">Mov2</span>: {{poke.mov2.nombre }}<br> 
+                    <span class="mov">Mov3</span>: {{poke.mov3.nombre }}<br> 
+                    <span class="mov">Mov4</span>: {{poke.mov4.nombre }}</p>   
                 </li>
                 </div>
         {% if i == 5 %}   

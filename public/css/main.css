@@ -1,7 +1,7 @@
 body {
     /*background-image: url("h.jpg");
     background-color:rgba(0, 0, 0, 0.5);*/
-    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("h.jpg");
+    background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), url("h.jpg");
 }
 
 #formlogin {
@@ -15,13 +15,16 @@ body {
     text-align: center;
 }
 
-#princi a.btn {
-    margin-bottom: 5px;
+table#princi td:last-child, table#princi td:nth-child(2) {
+    padding-top: 35px;
 }
 
-#princi img + a {
-    color: white;
-    font-size: 1.2em;
+table form {
+    display: inline;
+}
+
+table#formatostable a{
+    margin-bottom: 10px;
 }
 
 #princi img + a:hover {
@@ -29,9 +32,11 @@ body {
     color: royalblue;
 }
 
-.titulo {
+h1.titulo {
     text-align: center;
     font-family: "Pokemon Solid";
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
 table.titulo {
@@ -53,7 +58,7 @@ table.titulo {
 }
 
 form[name="poke"], form.mantenimiento {
-    background-color: burlywood;
+    background-color: cadetblue;
     border-radius: 2em;
     padding: 2em;
     width: 60%;
@@ -69,12 +74,16 @@ form[name="poke"] button {
     color: red;
 }
 
-a.crear {
+a.crear, button.crear {
+    margin-left: 45%;
+    margin-bottom: 50px;
+}
+button.guardar {
     margin-left: 45%;
 }
-
 .anadir {
-    margin: 5pt 0pt 5pt 10pt;
+    margin-left: 80%;
+    margin-top: 20px;
 }
 
 .ocultate {
@@ -84,12 +93,16 @@ a.crear {
 div img.show {
     width: 50%;
     margin-top: 20px;
-   
+}
+
+div#mostrarnoticia img {
+    width: 20%;
+    margin-left: 40%;
 }
 
 .container {
     width: 100%;
-    background-color: antiquewhite;
+    background-color: cadetblue;
     padding: 1.5em;
     border: 1px solid black;
     border-radius: 20px 20px;
@@ -122,23 +135,30 @@ div img.show {
     margin-right: 10px;
     margin-top: 10px;
     white-space: nowrap;
+    
+}
+
+.team_builder_entry {
+    margin-right: 100px;
 }
 
 #team {
     width: 100%;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
 }
 
 .team-flex-wrapper {
     width:100%;
-    height:500px;
     justify-content: center;
     max-width: 1500px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
-.filtroformato{
+.filtroformato, .pokeinfo{
     text-align: center;   
 }
 
@@ -151,17 +171,133 @@ div img.show {
     margin-right: 15px;
 }
 
-#princi th {
+table.titulo tr.table-info th, table.titulo th {
     font-size: 25px;
     color: black;
 }
 
 #princi td:first-child a {
     color: aquamarine;
+    font-size: 1.2em;
 }
 
 #princi td:first-child a:hover {
     color: white;
 }
+
+span.page-link, a.page-link{
+    font-weight: bold;
+}
+
+div.filtroformato select {
+    font-size: 20px;
+}
+
+a#titulo-menu {
+    font-size: 30px;
+    font-family: fantasy;
+    font-weight: bold;
+}
+
+li.nav-item {
+    margin-right: 20px;
+    font-family: fantasy;
+    text-transform: uppercase;
+}
+
+li.active {
+    margin-left: 20px;
+}
+
+li.nav-item:hover {
+    background-color: darkcyan;
+}
+
+.datos {
+    background-color: cadetblue;
+    padding: 20px;
+    margin: 50px 50px 50px 100px;
+}
+
+
+div#contenido span.atributo,div#contenido li.list-group-item {
+    font-size: 20px;
+}
+
+.bg-naranja {
+    background-color: orangered;
+}
+
+#princi td img {
+    margin-right: 20px;
+}
+
+.mantenimiento label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+form.mantenimiento button, form.mantenimiento a {
+    margin-top: 30px;
+}
+
+div#articulo {
+    margin-top: 20px;
+}
+
+span#usuario {
+    margin-right: 20px
+}
+
+table#tablaarticulos td a.btn-primary, table#tablachamps td a.btn-primary {
+    margin-bottom: 10px;
+}
+
+form#deletearticulo, form#deletechamps {
+    display: inline;
+}
+
+.btn-link {
+    color: cadetblue;
+    font-size: 25px;
+}
+
+.btn-link:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+span.objeto {
+    color: red;
+    font-weight: bold;
+}
+
+span.hab {
+    color: blue;
+    font-weight: bold;
+}
+
+span.movs {
+    color: brown;
+    font-weight: bold;
+}
+span.spread {
+    color: green;
+    font-weight: bold;
+}
+
+span.mov {
+    color: darkorange;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
 
 

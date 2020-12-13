@@ -5,4 +5,5 @@
     {{form_widget(form.contenido, {attr:{'class':'form-control','rows':'10'}}) }}
      {{ form_widget(form) }}
     <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+     <a class="btn btn-primary" href="{{ path('articulo_index') }}">Volver al listado</a>
 {{ form_end(form) }}

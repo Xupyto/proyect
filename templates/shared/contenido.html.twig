@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1 class="titulo">{{ pokemon.nombre }}</h1>
-<div>
+<div class="pokeinfo">
     <img width="100" heigh="100" src="{{ asset('imagenes//'~ pokemon.foto) }}" alt="{{pokemon.nombre}}">
     <img width="100" heigh="50"  src="{{ asset('imagenes/tipos//'~ pokemon.tipoNombre[0].nombre ) }}" alt="{{pokemon.tipoNombre[0].nombre}}">
    {% if pokemon.tipoNombre[1] is defined %}
@@ -15,41 +15,47 @@
 
 </div>
 
-
+<div id="contenido">
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3 datos">
         <h1 class="titulo">Estadísticas</h1>
         <ul class="list-group">
             <li class="list-group-item"> 
+                <span class="atributo">Vida</span>
                 <div class="progress">
-                HP
+              
                 <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (pokemon.hp*100)/mayor }}%" aria-valuenow="{{pokemon.hp}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.hp}}</div>
                 </div>
                 
             </li>
-            <li class="list-group-item"><div class="progress">
-                Atk
+            <li class="list-group-item">
+                <span class="atributo">Ataque</span><div class="progress">
+                
                 <div class="progress-bar bg-warning" role="progressbar" style="width: {{ (pokemon.atq*100)/mayor }}%" aria-valuenow="{{pokemon.atq}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.atq}}</div>
                 </div>
             </li>
-            <li class="list-group-item"><div class="progress">
-                Def
+            <li class="list-group-item">
+                <span class="atributo">Defensa</span><div class="progress">
+                
                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ (pokemon.def*100)/mayor }}%" aria-valuenow="{{pokemon.def}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.def}}</div>
                 </div>
             </li>
-            <li class="list-group-item"><div class="progress">
-                Spa
+            <li class="list-group-item">
+                 <span class="atributo">Ataque especial</span><div class="progress">
+               
                 <div class="progress-bar bg-success" role="progressbar" style="width: {{ (pokemon.spa*100)/mayor }}%" aria-valuenow="{{pokemon.spa}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.spa}}</div>
                 </div>
             </li>
-            <li class="list-group-item"><div class="progress">
-                Spd
+            <li class="list-group-item">
+                <span class="atributo">Defensa especial</span><div class="progress">
+                
                 <div class="progress-bar" role="progressbar" style="width: {{ (pokemon.spd*100)/mayor }}%" aria-valuenow="{{pokemon.spd}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.spd}}</div>
                 </div>
             </li>
-            <li class="list-group-item"><div class="progress">
-                Vel
-                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ (pokemon.vel*100)/mayor }}%" aria-valuenow="{{pokemon.vel}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.vel}}</div>
+            <li class="list-group-item">
+                 <span class="atributo">Velocidad</span><div class="progress">
+               
+                <div class="progress-bar bg-naranja" role="progressbar" style="width: {{ (pokemon.vel*100)/mayor }}%" aria-valuenow="{{pokemon.vel}}" aria-valuemin="0" aria-valuemax="{{mayor}}">{{pokemon.vel}}</div>
                 </div>
             </li>
         </ul>
@@ -57,7 +63,7 @@
            <a class="btn btn-primary anadir" href="{{ path('poke_edit', {'idpoke': pokemon.idpoke}) }}">Editar</a>
         {% endif %}
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3 datos">
         <h1 class="titulo">Movimientos</h1>
         <ul class="list-group">
         {% set i = 0 %}
@@ -72,7 +78,7 @@
            <a class="btn btn-primary anadir" href="{{ path('anadir_mov', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %} 
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3 datos">
         <h1 class="titulo">Objetos</h1>
         <ul class="list-group">
         {% set i = 0 %}
@@ -91,7 +97,7 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3 datos">
         <h1 class="titulo">Habilidades</h1>
         <ul class="list-group">
         {% set i = 0 %}
@@ -106,7 +112,7 @@
            <a class="btn btn-primary anadir" href="{{ path('anadir_hab', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3 datos">
         <h1 class="titulo">Compañeros</h1>
         <ul class="list-group">
         {% set i = 0 %}
@@ -128,7 +134,7 @@
            <a class="btn btn-primary anadir" href="{{ path('anadir_partner', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3 datos">
         <h1 class="titulo">Spread</h1>
         <ul class="list-group">
         {% set i = 0 %}
@@ -143,5 +149,6 @@
            <a class="btn btn-primary anadir" href="{{ path('anadir_spread', {'idpoke': pokemon.idpoke, 'format': format.id }) }}">Añadir</a>
         {% endif %}
         </div>
+</div>
 </div>
 {% endblock %}

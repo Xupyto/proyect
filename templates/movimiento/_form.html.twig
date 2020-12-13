@@ -4,4 +4,5 @@
     {{form_widget(form.tipoNombre)}}
     {{form_widget(form)}}
     <button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+     <a class="btn btn-primary" href="{{ path('movimiento_index') }}">Volver al listado</a>
 {{ form_end(form) }}

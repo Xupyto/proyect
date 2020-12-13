@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('articulo_delete', {'idarticulo': articulo.idarticulo}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
+<form class="derecha" id="deletearticulo" method="post" action="{{ path('articulo_delete', {'idarticulo': articulo.idarticulo}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ articulo.idarticulo) }}">
     <button class="btn btn-primary">Borrar</button>

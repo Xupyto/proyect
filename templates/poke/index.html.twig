@@ -25,7 +25,7 @@
                 <td><img width="100" heigh="100" src="{{ asset('imagenes//'~ poke.foto) }}" alt="{{poke.nombre}}"><a class="action" href="{{ path('poke_show', {'idpoke': poke.idpoke, 'format': format[0].id }) }}">{{ poke.nombre }}</a> </td>
                 <td>{{ porcentajes[i] }} %</td>
                  {% if is_granted('ROLE_ADMIN') %}
-                <td> <a class="btn btn-primary" href="{{ path('poke_edit', {'idpoke': poke.idpoke}) }}">Editar</a>
+                <td> <a class="btn btn-primary editar" href="{{ path('poke_edit', {'idpoke': poke.idpoke}) }}">Editar</a>
                {{ include('poke/_delete_form.html.twig') }}</td>
                 {% endif %}
                

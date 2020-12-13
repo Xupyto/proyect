@@ -23,7 +23,7 @@
                     <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ poke.tipoNombre[1].nombre ) }}" alt="{{poke.tipoNombre[1].nombre}}">
                     {% endif %}
               
-                <button id="a{{poke.idpoke}}" class="btn btn-dark anadir">Añadir</button>
+                <button id="a{{poke.idpoke}}" class="btn btn-dark anadido">Añadir</button>
             </div>
         {% endfor %}
     </ul>
@@ -34,79 +34,8 @@
 
  
 <hr>
-<div id="team">
-    <ul class="list ss">
-        <div class="team-flex-wrapper">
-        {% set i = 0 %}
-        
-            {% for miembro in team %}
-               <div id="team_"~{{miembro[0].nombre}} class="pokedex_entry team_builder_entry">
-                <li class="list-group-item ">
-                <img width="50" heigh="50" src="{{ asset('imagenes//'~ miembro[0].foto) }}" alt="{{miembro[0].nombre}}"> {{ miembro[0].nombre }} 
-                
-                <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[0].nombre ) }}" alt="{{miembro[0].tipoNombre[0].nombre}}">
-                    {% if miembro[0].tipoNombre[1] is defined %}
-                        <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[1].nombre ) }}" alt="{{miembro[0].tipoNombre[1].nombre}}">
-                    {% endif %}
-                    <br>
-                    {% if objs[i] != 'Ninguno' %}
-                        <p>Objeto: {{objs[i].nombre }} <a class="btn btn-danger" href="{{ path('remove_obj', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>  
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_objeto_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ objeto</a>                    
-                   {% endif %}
-                    {% if habs[i] != 'Ninguna' %}
-                        <p>Habilidad: {{habs[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_hab', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_habilidad_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ habilidad</a>                      
-                   {% endif %}
-                   {% if spreads[i] != 'Ninguno' %}
-                        <p>Spread: {{spreads[i].stats }}<a class="btn btn-danger" href="{{ path('remove_spread', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_spread_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ spread</a>                      
-                   {% endif %}
-                   <p>Movimientos</p>
-                   {% if movs1[i] != 'Ninguno' %}
-                        <p>Mov1: {{movs1[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}">+</a>                      
-                   {% endif %}
-                   {% if movs2[i] != 'Ninguno' %}
-                        <p>Mov2: {{movs2[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}">+</a>                      
-                   {% endif %}
-                   {% if movs3[i] != 'Ninguno' %}
-                        <p>Mov3: {{movs3[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}">+</a>                      
-                   {% endif %}
-                   {% if movs4[i] != 'Ninguno' %}
-                        <p>Mov4: {{movs4[i].nombre }}<a class="btn btn-danger" href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}">-</a></p>
-                        {% else %}
-                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}">+</a>                      
-                   {% endif %}
-                </li>
-              
-               
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button id="a{{miembro[0].idpoke}}" class="btn btn-danger delete">Eliminar</button>
-                </div>
-                </div>
-                 {% set i = i + 1 %}
-                {% else %}
-                            <div>
-                                <p>No hay pokes.</p>
-                            </div>
-           
-            {% endfor %}
-       
-      
-        </div>
-    </ul>
-</div>
-
 {% if team != null %}
-  <button  type="button" data-toggle="modal" data-target="#modalguardar" class="btn btn-info" >Guardar</button>
+  <button  type="button" data-toggle="modal" data-target="#modalguardar" class="btn btn-info guardar" >Guardar</button>
 
 <!-- Modal guardar -->
 <div class="modal fade" id="modalguardar" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -131,6 +60,81 @@
 </div>
 
  {% endif %}
+<div id="team">
+    <ul class="list ss">
+        <div class="team-flex-wrapper">
+        {% set i = 0 %}
+        
+            {% for miembro in team %}
+               <div id="team_"~{{miembro[0].nombre}} class="pokedex_entry team_builder_entry">
+                <li class="list-group-item ">
+                <img width="50" heigh="50" src="{{ asset('imagenes//'~ miembro[0].foto) }}" alt="{{miembro[0].nombre}}"> {{ miembro[0].nombre }} 
+                
+                <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[0].nombre ) }}" alt="{{miembro[0].tipoNombre[0].nombre}}">
+                    {% if miembro[0].tipoNombre[1] is defined %}
+                        <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ miembro[0].tipoNombre[1].nombre ) }}" alt="{{miembro[0].tipoNombre[1].nombre}}">
+                    {% endif %}
+                    <br>
+                    {% if objs[i] != 'Ninguno' %}
+                        <p><span class="objeto">Objeto</span>: {{objs[i].nombre }}
+                         <a href="{{ path('remove_obj', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X">
+                        </a><br>  
+                        {% else %}
+                        <p>
+                    <a class="btn btn-success" href="{{ path('add_objeto_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ objeto</a><br>                    
+                   {% endif %}
+                    {% if habs[i] != 'Ninguna' %}
+                        <span class="hab">Habilidad</span>: {{habs[i].nombre }} <a  href="{{ path('remove_hab', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a><br>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_habilidad_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ habilidad</a> <br>                      
+                   {% endif %}
+                   {% if spreads[i] != 'Ninguno' %}
+                        <span class="spread">Spread</span>: {{spreads[i].stats }} <a href="{{ path('remove_spread', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a><br>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_spread_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo}) }}">+ spread</a> <br>                      
+                   {% endif %}
+                   <span class="movs">Movimientos</span><br>
+                   {% if movs1[i] != 'Ninguno' %}
+                        <span class="mov">Mov1</span>: {{movs1[i].nombre }} <a  href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a><br>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 0}) }}">+</a>   <br>                    
+                   {% endif %}
+                   {% if movs2[i] != 'Ninguno' %}
+                        <span class="mov">Mov2</span>: {{movs2[i].nombre }} <a  href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a><br>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 1}) }}">+</a>  <br>                     
+                   {% endif %}
+                   {% if movs3[i] != 'Ninguno' %}
+                        <span class="mov">Mov3</span>: {{movs3[i].nombre }} <a  href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a><br>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 2}) }}">+</a>   <br>                    
+                   {% endif %}
+                   {% if movs4[i] != 'Ninguno' %}
+                        <span class="mov">Mov4</span>: {{movs4[i].nombre }} <a  href="{{ path('remove_mov', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}"><img width="20" heigh="20" src="{{ asset('css//favicon.png') }}" alt="X"></a></p>
+                        {% else %}
+                    <a class="btn btn-success" href="{{ path('add_mov_team', {'idpoke': miembro[0].idpoke, 'idequipo': equipo.idequipo, 'n': 3}) }}">+</a>        </p>              
+                   {% endif %}
+                </li>
+              
+               
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button id="a{{miembro[0].idpoke}}" class="btn btn-danger delete">Eliminar</button>
+                </div>
+                </div>
+                 {% set i = i + 1 %}
+                {% else %}
+                            <div>
+                                <p>No hay pokes.</p>
+                            </div>
+           
+            {% endfor %}
+       
+      
+        </div>
+    </ul>
+</div>
+
+
 {% endblock %}
 
 
@@ -139,7 +143,7 @@
 
   $(document).ready(function(){
       var div = $("<div class='loader'>");
-    $(".anadir").click(function(){
+    $(".anadido").click(function(){
           
           $("body").append(div);
           var id = $(this).attr("id");
