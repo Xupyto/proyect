@@ -87,7 +87,7 @@ class PokeUsaObjController extends AbstractController
     }
 
     /**
-     * @Route("/{formato}/{poke}/{obj}", name="poke_usa_obj_delete", methods={"DELETE"})
+     * @Route("/delete/{formato}/{poke}/{obj}", name="poke_usa_obj_delete", methods={"DELETE"})
      */
     public function delete(Formato $formato, Pokemon $poke, Objeto $obj): Response
     {
@@ -99,5 +99,22 @@ class PokeUsaObjController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('poke_usa_obj_index');
+    }
+    /**
+     * @Route("/borrar/{formato}/{poke}/{obj}", name="poke_usa_obj_borrar", methods={"DELETE"})
+     */
+    public function borrar(Formato $formato, Pokemon $poke, Objeto $obj): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pokeusaobj = $em->getRepository(PokeUsaObj::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$obj->getIdobjeto());
+        $hola = $pokeusaobj[0];
+        
+        $em->remove($hola);
+        $em->flush();
+
+        return $this->redirectToRoute('poke_show', [
+            'idpoke' => $poke->getIdpoke(),
+            'format' => $formato->getId()
+        ]);
     }
 }

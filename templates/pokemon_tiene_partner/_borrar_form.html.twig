@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('pokemon_tiene_partner_borrar', {'formato': format.id, 'poke': pokemon.idpoke,
+'poke1': comp.pokemonIdpoke1.idpoke}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
+    <input type="hidden" name="_method" value="DELETE">
+    
+     <button class="btn btn-primary">Borrar</button>
+</form>

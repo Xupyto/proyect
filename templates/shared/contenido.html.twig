@@ -69,7 +69,13 @@
         {% set i = 0 %}
         {% for a in ataques %}
             {% if i < 5 %}
-            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ a.movimiento.tipoNombre.nombre ) }}" alt="{{a.movimiento.tipoNombre.nombre}}"> - {{a.porcentajeUso}} %</li>
+            
+            <li class="list-group-item">{{ataques[i].movimiento.nombre}} - <img width="50" heigh="25"  src="{{ asset('imagenes/tipos//'~ a.movimiento.tipoNombre.nombre ) }}" alt="{{a.movimiento.tipoNombre.nombre}}"> - {{a.porcentajeUso}} %
+  
+            {% if is_granted('ROLE_ADMIN') and format != null %}
+            {{ include('poke_puede_aprender_mov/_borrar_form.html.twig') }}
+             {% endif %} 
+            </li>
              {% endif %} 
              {% set i = i+1 %}
         {% endfor %}
@@ -84,7 +90,12 @@
         {% set i = 0 %}
         {% for object in objetos %}
          {% if i < 5 %}
-            <li class="list-group-item">{{object.objetoIdobjeto.nombre}} - {{object.porcentajeUso}} %</li>
+        
+            <li class="list-group-item">{{object.objetoIdobjeto.nombre}} - {{object.porcentajeUso}} %
+            {% if is_granted('ROLE_ADMIN') and format != null %}
+            {{ include('poke_usa_obj/_borrar_form.html.twig') }}
+             {% endif %} 
+           </li>
              {% endif %} 
              {% set i = i+1 %}
         {% endfor %}
@@ -103,7 +114,11 @@
         {% set i = 0 %}
         {% for hab in habilidades %}
              {% if i < 3 %}
-            <li class="list-group-item">{{hab.habilidad.nombre}} - {{hab.porcentajeUso}} %</li>
+            <li class="list-group-item">{{hab.habilidad.nombre}} - {{hab.porcentajeUso}} %
+                {% if is_granted('ROLE_ADMIN') and format != null %}
+            {{ include('poke_tiene_habilidad/_borrar_form.html.twig') }}
+             {% endif %} 
+             </li>
             {% endif %}
              {% set i = i+1 %}
         {% endfor %}
@@ -124,7 +139,11 @@
             <a class="action" href="{{ path('poke_show', {'idpoke': comp.pokemonIdpoke1.idpoke, 'format': format.id }) }}">{{comp.pokemonIdpoke1.nombre}}</a>
             {% else %}
             {{comp.pokemonIdpoke1.nombre}}
-            {% endif %} - {{comp.porcentajeUso}} %</li>
+            {% endif %} - {{comp.porcentajeUso}} %
+             {% if is_granted('ROLE_ADMIN') and format != null %}
+            {{ include('pokemon_tiene_partner/_borrar_form.html.twig') }}
+             {% endif %} 
+             </li>
                 
             {% endif %}
              {% set i = i+1 %}
@@ -140,7 +159,11 @@
         {% set i = 0 %}
         {% for spread in spreads %}
         {% if i < 5 %}
-            <li class="list-group-item">{{spread.spreadIdspread.stats}} - {{spread.porcentajeUso}} %</li>
+            <li class="list-group-item">{{spread.spreadIdspread.stats}} - {{spread.porcentajeUso}} %
+                 {% if is_granted('ROLE_ADMIN') and format != null %}
+            {{ include('pokemon_tiene_spread/_borrar_form.html.twig') }}
+             {% endif %} 
+            </li>
             {% endif %}
              {% set i = i+1 %}
         {% endfor %}

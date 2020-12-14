@@ -87,7 +87,7 @@ class PokemonTienePartnerController extends AbstractController
     }
 
     /**
-     * @Route("/{formato}/{poke}/{poke1}", name="pokemon_tiene_partner_delete", methods={"DELETE"})
+     * @Route("/delete/{formato}/{poke}/{poke1}", name="pokemon_tiene_partner_delete", methods={"DELETE"})
      */
     public function delete(Formato $formato, Pokemon $poke, Pokemon $poke1): Response
     {
@@ -99,5 +99,23 @@ class PokemonTienePartnerController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('pokemon_tiene_partner_index');
+    }
+
+    /**
+     * @Route("/borrar/{formato}/{poke}/{poke1}", name="pokemon_tiene_partner_borrar", methods={"DELETE"})
+     */
+    public function borrar(Formato $formato, Pokemon $poke, Pokemon $poke1): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pokemonTienePartner = $em->getRepository(PokemonTienePartner::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$poke1->getIdpoke());
+        $hola = $pokemonTienePartner[0];
+        
+        $em->remove($hola);
+        $em->flush();
+
+        return $this->redirectToRoute('poke_show', [
+            'idpoke' => $poke->getIdpoke(),
+            'format' => $formato->getId()
+        ]);
     }
 }

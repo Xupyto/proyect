@@ -87,7 +87,7 @@ class PokeTieneHabilidadController extends AbstractController
     }
 
     /**
-     * @Route("/{formato}/{poke}/{hab}", name="poke_tiene_habilidad_delete", methods={"DELETE"})
+     * @Route("/delete/{formato}/{poke}/{hab}", name="poke_tiene_habilidad_delete", methods={"DELETE"})
      */
     public function delete(Formato $formato, Pokemon $poke, Habilidad $hab): Response
     {
@@ -99,5 +99,23 @@ class PokeTieneHabilidadController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('poke_tiene_habilidad_index');
+    }
+
+    /**
+     * @Route("/borrar/{formato}/{poke}/{hab}", name="poke_tiene_habilidad_borrar", methods={"DELETE"})
+     */
+    public function borrar(Formato $formato, Pokemon $poke, Habilidad $hab): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $poketienehab = $em->getRepository(PokeTieneHabilidad::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$hab->getIdhabilidad());
+        $hola = $poketienehab[0];
+        
+        $em->remove($hola);
+        $em->flush();
+
+        return $this->redirectToRoute('poke_show', [
+            'idpoke' => $poke->getIdpoke(),
+            'format' => $formato->getId()
+        ]);
     }
 }

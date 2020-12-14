@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('pokemon_tiene_spread_borrar', {'formato': format.id, 'poke': pokemon.idpoke,
+'spread':spread.spreadIdspread.idspread}) }}" onsubmit="return confirm('Seguro que quieres borrarlo?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary">Borrar</button>
+</form>

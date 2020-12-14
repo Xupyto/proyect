@@ -93,7 +93,7 @@ class PokePuedeAprenderMovController extends AbstractController
     
 
     /**
-     * @Route("/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_delete", methods={"DELETE", "GET"})
+     * @Route("/delete/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_delete", methods={"DELETE", "GET"})
      */
     public function delete(Formato $formato, Pokemon $poke, Movimiento $mov): Response
     {
@@ -107,5 +107,25 @@ class PokePuedeAprenderMovController extends AbstractController
         
 
         return $this->redirectToRoute('poke_puede_aprender_mov_index');
+    }
+
+    /**
+     * @Route("/borrar/{formato}/{poke}/{mov}", name="poke_puede_aprender_mov_borrar", methods={"DELETE", "GET"})
+     */
+    public function borrado(Formato $formato, Pokemon $poke, Movimiento $mov): Response
+    {
+       
+        $em = $this->getDoctrine()->getManager();
+        $pokePuedeAprenderMov = $em->getRepository(PokePuedeAprenderMov::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$mov->getIdMov());
+        $hola = $pokePuedeAprenderMov[0];
+        
+        $em->remove($hola);
+        $em->flush();
+        
+
+        return $this->redirectToRoute('poke_show', [
+            'idpoke' => $poke->getIdpoke(),
+            'format' => $formato->getId()
+        ]);
     }
 }

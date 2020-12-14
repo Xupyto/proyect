@@ -87,7 +87,7 @@ class PokemonTieneSpreadController extends AbstractController
     }
 
     /**
-     * @Route("/{formato}/{poke}/{spread}", name="pokemon_tiene_spread_delete", methods={"DELETE"})
+     * @Route("/delete/{formato}/{poke}/{spread}", name="pokemon_tiene_spread_delete", methods={"DELETE"})
      */
     public function delete(Formato $formato, Pokemon $poke, Spread $spread): Response
     {
@@ -99,5 +99,23 @@ class PokemonTieneSpreadController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('pokemon_tiene_spread_index');
+    }
+
+    /**
+     * @Route("/borrar/{formato}/{poke}/{spread}", name="pokemon_tiene_spread_borrar", methods={"DELETE"})
+     */
+    public function borrar(Formato $formato, Pokemon $poke, Spread $spread): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pokemonTieneSpread = $em->getRepository(PokemonTieneSpread::class)->findByManyFields($formato->getId(),$poke->getIdpoke(),$spread->getIdspread());
+        $hola = $pokemonTieneSpread[0];
+        
+        $em->remove($hola);
+        $em->flush();
+
+        return $this->redirectToRoute('poke_show', [
+            'idpoke' => $poke->getIdpoke(),
+            'format' => $formato->getId()
+        ]);
     }
 }
